@@ -8,6 +8,8 @@ public class Peca : MonoBehaviour
     public enum corPeca{Branca,Preta}
     public corPeca lado;
 
+    public bool selected;
+
     public enum Tipo{Peao, torre, cavalo, bispo, rainha, rei}
 
     public bool movimentada;
