@@ -21,41 +21,60 @@ public class Regras
     }
 
     #region Movimento das Pecas
-    public void PeaoMove(Peca pecaSelected, string tg){
+    public void PeaoMove(Peca pecaSelected, string tg){        
 
-        char xCord = CordenadaSplit(pecaSelected.casaAtual, 1);
-        char yCord = CordenadaSplit(pecaSelected.casaAtual, 1);        
-        int xAtual = converterParaNumero(xCord);
-        int yAtual = Convert.ToInt32(yCord);
+        int xAtual = converterParaNumero(pecaSelected.casaAtual[0]);
+        int yAtual = converterParaNumero(pecaSelected.casaAtual[1]);
+        int xTg = converterParaNumero(tg[0]);
+        int yTg = converterParaNumero(tg[1]); 
 
-        int xTg = converterParaNumero(CordenadaSplit(tg, 1));
-        int yTg = converterParaNumero(CordenadaSplit(tg, 2));  
+        //int variaLado = 0;      
+        
+        Debug.Log(pecaSelected.casaAtual[0] + "," + tg[0]);
+        Debug.Log(xTg + "," + xAtual);
+        bool podeMover = false;
 
-        if(pecaSelected.movimentada == false){   
-           
-             if(xTg == xAtual && yTg == yAtual ){
-                if( !casaUsadas.ContainsKey((converterParaLetra(xAtual + 1)) + yAtual.ToString()))
-                {                       
+        if((pecaSelected.lado == Peca.corPeca.Branca && xTg > xAtual) || (pecaSelected.lado == Peca.corPeca.Preta && xTg < xAtual))
+        podeMover = true;
+        
+        if(podeMover == true){
+            if(pecaSelected.lado == Peca.corPeca.Branca){
+                if(pecaSelected.movimentada == false && (yTg == yAtual && xTg <= xAtual + 2)){
+                        
+                    Debug.Log("Entro");                        
                     pecaSelected.casaSelecionada = tg;
-                    pecaSelected.movimentada = true;                  
-                    
-                }
-             }
+                    pecaSelected.movimentada = true;                
                 
-            
-            
-        }else{
+                }else if(yTg == yAtual && xTg <= xAtual + 1){
+                    
+                    pecaSelected.casaSelecionada = tg;
+                    pecaSelected.movimentada = true; 
 
+                }
+            }else if(pecaSelected.lado == Peca.corPeca.Preta){
+                
+                if(pecaSelected.movimentada == false && (yTg == yAtual && xTg >= xAtual - 2)){
+                        
+                    Debug.Log("Entro");                        
+                    pecaSelected.casaSelecionada = tg;
+                    pecaSelected.movimentada = true;                
+                
+                }else if(yTg == yAtual && xTg >= xAtual - 1){
+                    
+                    pecaSelected.casaSelecionada = tg;
+                    pecaSelected.movimentada = true; 
 
-        }      
+                }
+            }
+        }    
 
 
     }
 
     public void TorreMove(Peca selected, string tg){
 
-        char x = CordenadaSplit(selected.casaAtual, 1);
-        char y = CordenadaSplit(selected.casaAtual, 2);
+        char x = tg[0];
+        char y = tg[1];
 
         if(selected.movimentada == false){                              
                     
@@ -69,28 +88,29 @@ public class Regras
 
     public void CavaloMove(Peca selected, string tg){
 
-        char x = CordenadaSplit(selected.casaAtual, 1);
-        char y = CordenadaSplit(selected.casaAtual, 2);
+        char x = tg[0];
+        char y = tg[1];
 
     }
 
     public void BispoMove(Peca selected, string tg){
-        char x = CordenadaSplit(selected.casaAtual, 1);
-        char y = CordenadaSplit(selected.casaAtual, 2);
+        
+        char x = tg[0];
+        char y = tg[1];
 
     }
 
     public void RainhaMove(Peca selected, string tg){
 
-        char x = CordenadaSplit(selected.casaAtual, 1);
-        char y = CordenadaSplit(selected.casaAtual, 2);
+        char x = tg[0];
+        char y = tg[1];
 
     }
 
     public void ReiMove(Peca selected, string tg){
 
-        char x = CordenadaSplit(selected.casaAtual, 1);
-        char y = CordenadaSplit(selected.casaAtual, 2);
+        char x = tg[0];
+        char y = tg[1];
 
         if(selected.movimentada == false){
                             
@@ -110,25 +130,6 @@ public class Regras
 
     }
     #endregion
-    
-    char CordenadaSplit(string cordenada, int xy){
-                   
-        char x = cordenada[0];
-        char y = cordenada[1];
-
-        if(xy == 1){
-            return x;
-        }
-        else if(xy == 2){
-         
-           return y;
-
-        }else{
-            return ' ';
-        }
-        
-    }
-
 
     int converterParaNumero(char digito){
 
@@ -159,7 +160,31 @@ public class Regras
             break;
             case 'h':
                 n = 8;
-            break;           
+            break;
+            case '1':
+                n = 1;
+            break;
+            case '2':
+                n = 2;
+            break;
+            case '3':
+                n = 3;
+            break;
+            case '4':
+                n = 4;
+            break;
+            case '5':
+                n = 5;
+            break;
+            case '6':
+                n = 6;
+            break;
+            case '7':
+                n = 7;
+            break;
+            case '8':
+                n = 8;
+            break;     
         }
         
         return n;

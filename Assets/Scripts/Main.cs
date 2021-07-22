@@ -42,8 +42,8 @@ public class Main : MonoBehaviour
     if(too){
 
       efect.gameObject.SetActive(true);
-      efect .gameObject.transform.position = hit.collider.gameObject.transform.position;      
-    
+      efect.gameObject.transform.position = hit.collider.gameObject.transform.position;
+     
       if(Input.GetMouseButtonDown(0)){       
 
         bool mover = false;
