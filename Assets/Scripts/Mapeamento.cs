@@ -20,13 +20,14 @@ public class Mapeamento
                 
                 casas[x,y] = letras[x].ToString() + numeros[y].ToString();                
                 casaTab.GetChild(casaNumber).name = casas[x,y];
+                casaTab.GetChild(casaNumber).GetComponentInChildren<TextMesh>().text = casas[x,y];
                 Vector2 v2 = new Vector2(casaTab.GetChild(casaNumber).transform.position.x,casaTab.GetChild(casaNumber).transform.position.z);
                 casaPos.Add(casaTab.GetChild(casaNumber).name,v2);
                 casaNumber ++;          
 
             }
         }       
-       
+        
         return casaPos;
 
     }

@@ -20,56 +20,155 @@ public class Regras
 
     }
 
-    #region Movimento das Pecas
+    #region Peão
     public void PeaoMove(Peca pecaSelected, string tg){        
 
-        int xAtual = converterParaNumero(pecaSelected.casaAtual[0]);
-        int yAtual = converterParaNumero(pecaSelected.casaAtual[1]);
-        int xTg = converterParaNumero(tg[0]);
-        int yTg = converterParaNumero(tg[1]); 
+        int LetraAtual = converterParaNumero(pecaSelected.casaAtual[0]);
+        int NumeroAtual = converterParaNumero(pecaSelected.casaAtual[1]);
+        int LetraTg = converterParaNumero(tg[0]);
+        int NumeroTg = converterParaNumero(tg[1]); 
+      
+        // Peão Captura Peca                          
+                if(pecaSelected.lado == Peca.corPeca.Branca){
+                    if(casaUsadas.ContainsKey(tg)){     
+                        if(LetraTg == LetraAtual + 1 && ((NumeroTg == (NumeroAtual + 1)) || (NumeroTg == (NumeroAtual - 1)))){
 
-        //int variaLado = 0;      
-        
-        Debug.Log(pecaSelected.casaAtual[0] + "," + tg[0]);
-        Debug.Log(xTg + "," + xAtual);
-        bool podeMover = false;
+                            for(int i = 0;i < peca.Length;i++){
+                                if(peca[i].enabled){
+                                    if(tg == peca[i].casaAtual && pecaSelected.lado != peca[i].lado){
+                                        
+                                        Debug.Log("Entro");
+                                        casaUsadas[tg].PecaMorta();
+                                        pecaSelected.casaSelecionada = tg;
+                                        pecaSelected.movimentada = true;
+            
+                                    }
+                                }
+                            }
 
-        if((pecaSelected.lado == Peca.corPeca.Branca && xTg > xAtual) || (pecaSelected.lado == Peca.corPeca.Preta && xTg < xAtual))
-        podeMover = true;
-        
-        if(podeMover == true){
-            if(pecaSelected.lado == Peca.corPeca.Branca){
-                if(pecaSelected.movimentada == false && (yTg == yAtual && xTg <= xAtual + 2)){
+                        }
+                    }
+        ////////////////////////////
+        // Peão Movimenta
+                    if(!casaUsadas.ContainsKey(tg)){
                         
-                    Debug.Log("Entro");                        
-                    pecaSelected.casaSelecionada = tg;
-                    pecaSelected.movimentada = true;                
-                
-                }else if(yTg == yAtual && xTg <= xAtual + 1){
-                    
-                    pecaSelected.casaSelecionada = tg;
-                    pecaSelected.movimentada = true; 
+                        if(NumeroTg == NumeroAtual && LetraTg > LetraAtual){
+                           
+                           if(pecaSelected.movimentada == false){
+                                
+                                if(!casaUsadas.ContainsKey(converterParaLetra(LetraAtual + 1).ToString() + NumeroAtual.ToString())){
+                                                                     
+                                    
+                                    if(!casaUsadas.ContainsKey(converterParaLetra(LetraAtual + 2).ToString() + NumeroAtual.ToString())){
+                                        
+                                                                           
+                                        if(LetraTg == LetraAtual + 2){
+                                            
+                                            pecaSelected.casaSelecionada = tg;
+                                            pecaSelected.movimentada = true;
+                                        
+                                        }
 
+                                    }
+
+                                    if(LetraTg == LetraAtual + 1){
+                                            
+                                        pecaSelected.casaSelecionada = tg;
+                                        pecaSelected.movimentada = true;
+                                        
+                                    }
+                                }
+                               
+                            }else{
+
+                                if(!casaUsadas.ContainsKey(converterParaLetra(LetraAtual + 1).ToString() + NumeroAtual.ToString())){                                 
+                                        
+                                    if(LetraTg == LetraAtual + 1){
+                                            
+                                        pecaSelected.casaSelecionada = tg;
+                                        pecaSelected.movimentada = true;
+                                        
+                                    }
+                                    
+                                }
+
+                            }
+                           
+                        }  
+                    }
                 }
-            }else if(pecaSelected.lado == Peca.corPeca.Preta){
-                
-                if(pecaSelected.movimentada == false && (yTg == yAtual && xTg >= xAtual - 2)){
+
+                if(pecaSelected.lado == Peca.corPeca.Preta){
+                    if(casaUsadas.ContainsKey(tg)){
+                        if(LetraTg == LetraAtual - 1 && ((NumeroTg == (NumeroAtual + 1)) || (NumeroTg == (NumeroAtual - 1)))){
+                            
+                            for(int i = 0;i < peca.Length;i++){
+                                if(peca[i].enabled){
+                                    if(tg == peca[i].casaAtual && pecaSelected.lado != peca[i].lado){
+                                    
+                                        casaUsadas[tg].enabled = false;
+                                        casaUsadas[tg].gameObject.SetActive(false);
+                                        pecaSelected.casaSelecionada = tg;
+                                        pecaSelected.movimentada = true;
+            
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if(!casaUsadas.ContainsKey(tg)){
                         
-                    Debug.Log("Entro");                        
-                    pecaSelected.casaSelecionada = tg;
-                    pecaSelected.movimentada = true;                
-                
-                }else if(yTg == yAtual && xTg >= xAtual - 1){
-                    
-                    pecaSelected.casaSelecionada = tg;
-                    pecaSelected.movimentada = true; 
+                        if(NumeroTg == NumeroAtual && LetraTg < LetraAtual){
+                           
+                           if(pecaSelected.movimentada == false){
+                                
+                                if(!casaUsadas.ContainsKey(converterParaLetra(LetraAtual - 1).ToString() + NumeroAtual.ToString())){
+                                                                     
+                                    
+                                    if(!casaUsadas.ContainsKey(converterParaLetra(LetraAtual - 2).ToString() + NumeroAtual.ToString())){
+                                    
+                                        
+                                        if(LetraTg == LetraAtual - 2){
+                                            
+                                            pecaSelected.casaSelecionada = tg;
+                                            pecaSelected.movimentada = true;
+                                        
+                                        }
 
+                                    }
+
+                                    if(LetraTg == LetraAtual - 1){
+                                            
+                                        pecaSelected.casaSelecionada = tg;
+                                        pecaSelected.movimentada = true;
+                                        
+                                    }
+                                }
+                               
+                                }else{
+
+                            if(!casaUsadas.ContainsKey(converterParaLetra(LetraAtual + 1).ToString() + NumeroAtual.ToString())){                                 
+                                        
+                                if(LetraTg == LetraAtual - 1){
+                                            
+                                pecaSelected.casaSelecionada = tg;
+                                pecaSelected.movimentada = true;
+                                        
+                            }
+                                    
+                        }
+
+                    }
+                           
                 }
+
             }
-        }    
 
-
+        }      
+        
     }
+    #endregion
 
     public void TorreMove(Peca selected, string tg){
 
@@ -129,7 +228,7 @@ public class Regras
     void LaPasata(Peca selected, string tg){
 
     }
-    #endregion
+    
 
     int converterParaNumero(char digito){
 
@@ -233,8 +332,10 @@ public class Regras
 
         for(int i = 0;i <  casaTab.childCount;i++){
             for(int w = 0;w < peca.Length;w++){
-                if(casaTab.GetChild(i).name == peca[w].casaAtual){
-                    casaUsadas.Add(casaTab.GetChild(i).name,peca[w]);
+                if(peca[w].enabled){
+                    if(casaTab.GetChild(i).name == peca[w].casaAtual){
+                        casaUsadas.Add(casaTab.GetChild(i).name,peca[w]);
+                    }
                 }
             }
         }    

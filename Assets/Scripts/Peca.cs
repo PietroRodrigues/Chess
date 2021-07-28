@@ -5,6 +5,7 @@ using UnityEngine;
 public class Peca : MonoBehaviour
 {    
 
+    public Transform movementos;
     public enum corPeca{Branca,Preta}
     public corPeca lado;
 
@@ -22,6 +23,16 @@ public class Peca : MonoBehaviour
     public string casaSelecionada;
 
     List<Vector2> posFutures = new List<Vector2>();
+    
+    bool pecaCapturada = false;
+
+    public void PecaMorta(){
+
+        pecaCapturada = true;
+        this.gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+        this.enabled = false;       
+
+    }
 
 
 }

@@ -13,7 +13,6 @@ public class Main : MonoBehaviour
   Peca[] peca;    
   RaycastHit hit;
   public Peca selected;
-
   Regras regras;
 
   
@@ -49,18 +48,20 @@ public class Main : MonoBehaviour
         bool mover = false;
 
         for(int i = 0;i < peca.Length;i++){
-                    
-          if(peca[i].casaAtual == hit.collider.gameObject.name){
+          
+            if(peca[i].casaAtual == hit.collider.gameObject.name){
 
-            if(selected == null || peca[i].lado == selected.lado){
-              selected = peca[i];           
-              mover = false;
-              i = peca.Length;
+              if(selected == null || peca[i].lado == selected.lado){
+                selected = peca[i];
+                selected.selected = true;           
+                mover = false;
+                i = peca.Length;
+              }
+
+            }else{
+              mover = true;
             }
-
-          }else{
-            mover = true;
-          }                  
+          
         }
 
         if(mover && selected != null){
@@ -90,7 +91,8 @@ public class Main : MonoBehaviour
           }
 
           regras.MapearTableiro();
-          mapPecas.attMapPorJogada(casas,peca,casaTab);         
+          mapPecas.attMapPorJogada(casas,peca,casaTab);
+          selected.selected = false;       
           selected = null;
 
         }                                        
