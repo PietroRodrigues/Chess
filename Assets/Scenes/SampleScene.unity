@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 92773989}
   - component: {fileID: 92773988}
   m_Layer: 0
-  m_Name: InputPlayer
+  m_Name: MainObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,14 +147,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92773987}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37e3e2c79e9d36a4cbb38a097cfc749d, type: 3}
+  m_Script: {fileID: 11500000, guid: 13f45eebb7b2239488eed33bbb1b084c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 1088272145093104190}
+  jogadas: 1
   rayEfectHit: {fileID: 192556400}
-  pecaSelected: {fileID: 0}
 --- !u!4 &92773989
 Transform:
   m_ObjectHideFlags: 0
@@ -229,7 +228,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 669039231, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039232, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039233, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039234, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039235, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039236, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039237, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039238, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039239, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039240, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039241, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039242, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039243, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039244, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039245, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+    - {fileID: 669039246, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -462,7 +477,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: PecasPretas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1872649812, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649813, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649814, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649815, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649816, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649817, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649818, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649819, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649820, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649821, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649822, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649823, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649824, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649825, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649826, guid: d48f0683446510647ada020e8780f4fb, type: 3}
+    - {fileID: 1872649827, guid: d48f0683446510647ada020e8780f4fb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d48f0683446510647ada020e8780f4fb, type: 3}
 --- !u!1001 &1088272145093104187
 PrefabInstance:
@@ -777,32 +808,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdad8e88d01f50643829ef71bcf13297, type: 3}
---- !u!1 &1088272145093104188 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 277877451878363980, guid: cdad8e88d01f50643829ef71bcf13297, type: 3}
-  m_PrefabInstance: {fileID: 1088272145093104187}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1088272145093104189 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6039208110974660486, guid: cdad8e88d01f50643829ef71bcf13297, type: 3}
-  m_PrefabInstance: {fileID: 1088272145093104187}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1088272145093104190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088272145093104188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6c6b73cd767bb04b8b3b5e9e3844ae5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ViewCord: 0
-  board: {fileID: 1088272145093104189}
-  chessPiecesWhite: []
-  chessPiecesBlack: []
 --- !u!1001 &5444185499760527603
 PrefabInstance:
   m_ObjectHideFlags: 0
