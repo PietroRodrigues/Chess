@@ -489,7 +489,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6434091899118857505}
-  - component: {fileID: 1872649815}
   m_Layer: 0
   m_Name: TorrePreta
   m_TagString: Untagged
@@ -513,21 +512,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 634389082136174946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 1
-  cordenada: a8
 --- !u!1 &634513501758492393
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +735,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6758363741351613267}
-  - component: {fileID: 1872649816}
   m_Layer: 0
   m_Name: RainhaPreta
   m_TagString: Untagged
@@ -775,21 +758,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904811554817111474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 4
-  cordenada: d8
 --- !u!1 &1022621351296604483
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,7 +797,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5104009744016685653}
-  - component: {fileID: 1872649817}
   m_Layer: 0
   m_Name: RaiPreto
   m_TagString: Untagged
@@ -853,21 +820,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035066699519084490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 5
-  cordenada: e8
 --- !u!1 &1077106170561782452
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,7 +1090,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5759374972500826909}
-  - component: {fileID: 1872649825}
   m_Layer: 0
   m_Name: PiaoPretas
   m_TagString: Untagged
@@ -1162,21 +1113,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131368379662774220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 0
-  cordenada: c7
 --- !u!1 &1213508339938444494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,7 +1688,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760396360298535748}
-  - component: {fileID: 1872649813}
   m_Layer: 0
   m_Name: CavaloPreto
   m_TagString: Untagged
@@ -1776,21 +1711,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981418309882079753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 2
-  cordenada: b8
 --- !u!1 &1988811939585961073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2757,7 +2677,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 985673898065122990}
-  - component: {fileID: 1872649819}
   m_Layer: 0
   m_Name: CavaloPreto
   m_TagString: Untagged
@@ -2781,21 +2700,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3003775961557863315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 2
-  cordenada: g8
 --- !u!1 &3084875971503561780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4705,7 +4609,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3661397217341477206}
-  - component: {fileID: 1872649812}
   m_Layer: 0
   m_Name: TorrePreta
   m_TagString: Untagged
@@ -4729,21 +4632,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5007298936485188592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 1
-  cordenada: h8
 --- !u!1 &5015876180679434935
 GameObject:
   m_ObjectHideFlags: 0
@@ -5044,7 +4932,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5808489463229393640}
-  - component: {fileID: 1872649821}
   m_Layer: 0
   m_Name: PiaoPretas
   m_TagString: Untagged
@@ -5068,21 +4955,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5249528281449540370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 0
-  cordenada: g7
 --- !u!1 &5269330580435802819
 GameObject:
   m_ObjectHideFlags: 0
@@ -5152,7 +5024,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 942031149771535058}
-  - component: {fileID: 1872649818}
   m_Layer: 0
   m_Name: BispoPreto
   m_TagString: Untagged
@@ -5176,21 +5047,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5284582736244253051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 3
-  cordenada: f8
 --- !u!1 &5315503448923728073
 GameObject:
   m_ObjectHideFlags: 0
@@ -5444,7 +5300,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6088593576594855219}
-  - component: {fileID: 1872649827}
   m_Layer: 0
   m_Name: PiaoPretas
   m_TagString: Untagged
@@ -5468,21 +5323,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5579623341272741007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 0
-  cordenada: a7
 --- !u!1 &5584194476075859873
 GameObject:
   m_ObjectHideFlags: 0
@@ -6165,7 +6005,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6261263940257964311}
-  - component: {fileID: 1872649814}
   m_Layer: 0
   m_Name: BispoPreto
   m_TagString: Untagged
@@ -6189,21 +6028,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6278117748720720269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 3
-  cordenada: c8
 --- !u!1 &6345179903015768649
 GameObject:
   m_ObjectHideFlags: 0
@@ -6511,7 +6335,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9076860071971901770}
-  - component: {fileID: 1872649826}
   m_Layer: 0
   m_Name: PiaoPretas
   m_TagString: Untagged
@@ -6535,21 +6358,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6613519915859929031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 0
-  cordenada: b7
 --- !u!1 &6671753435634436023
 GameObject:
   m_ObjectHideFlags: 0
@@ -7077,7 +6885,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6698291610742043885}
-  - component: {fileID: 1872649822}
   m_Layer: 0
   m_Name: PiaoPretas
   m_TagString: Untagged
@@ -7101,21 +6908,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7171599442496024050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 0
-  cordenada: f7
 --- !u!1 &7194379696122664372
 GameObject:
   m_ObjectHideFlags: 0
@@ -8004,7 +7796,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2787122514542753532}
-  - component: {fileID: 1872649824}
   m_Layer: 0
   m_Name: PiaoPretas
   m_TagString: Untagged
@@ -8028,21 +7819,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264554833952481454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 0
-  cordenada: d7
 --- !u!1 &8296309431417994713
 GameObject:
   m_ObjectHideFlags: 0
@@ -8668,7 +8444,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4109111253465188453}
-  - component: {fileID: 1872649820}
   m_Layer: 0
   m_Name: PiaoPretas
   m_TagString: Untagged
@@ -8692,21 +8467,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8927738039907949321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 0
-  cordenada: h7
 --- !u!1 &8954961158099284284
 GameObject:
   m_ObjectHideFlags: 0
@@ -8797,7 +8557,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5139761453609291617}
-  - component: {fileID: 1872649823}
   m_Layer: 0
   m_Name: PiaoPretas
   m_TagString: Untagged
@@ -8821,21 +8580,6 @@ Transform:
   m_Father: {fileID: 8296309431417994710}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1872649823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8974755754916274190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cc0cd15c9668594e985ba94dac99c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cor: 1
-  tipo: 0
-  cordenada: e7
 --- !u!1 &8993969235379699289
 GameObject:
   m_ObjectHideFlags: 0
