@@ -7,8 +7,12 @@ public class PlayerInput : MonoBehaviour
 
     [SerializeField] int jogadas = 1;
     RaycastHit hit;
-    [SerializeField] GameObject rayEfectHit = null;
-    Tabuleiro tabuleiro;
+    [SerializeField] GameObject mouseEfect = null;
+    [SerializeField] GameObject captureEfect = null;
+    [SerializeField] GameObject moveEfect = null;
+    
+    [HideInInspector]
+    public Tabuleiro tabuleiro;
     Transform pecaSelected = null;
 
     // Update is called once per frame
@@ -29,8 +33,8 @@ public class PlayerInput : MonoBehaviour
 
         if(too){
 
-            rayEfectHit.gameObject.SetActive(true);
-            rayEfectHit.gameObject.transform.position = hit.collider.gameObject.transform.position;
+            mouseEfect.gameObject.SetActive(true);
+            mouseEfect.gameObject.transform.position = hit.collider.gameObject.transform.position;
 
             if(Input.GetMouseButtonDown(0)){
 
@@ -44,11 +48,11 @@ public class PlayerInput : MonoBehaviour
         
         }else{
 
-            rayEfectHit.gameObject.SetActive(false);
+            mouseEfect.gameObject.SetActive(false);
 
         }
     }
-
+    
     void pecasMove(List<Transform> timeCor, List<Transform> timeCorOposta){
 
          if(pecaSelected == null){
@@ -58,6 +62,8 @@ public class PlayerInput : MonoBehaviour
                   if(hit.collider.gameObject.name == timeCor[i].gameObject.GetComponent<BasePeca>().Cordenada){
 
                       pecaSelected = timeCor[i];
+                      BasePeca.ClearEfect(moveEfect.transform,captureEfect.transform);
+                      pecaSelected.GetComponent<BasePeca>().EfeitosCasasPosiveis(pecaSelected.GetComponent<BasePeca>(),tabuleiro,moveEfect.transform,captureEfect.transform);
                       i = timeCor.Count;
 
                   }
@@ -72,6 +78,8 @@ public class PlayerInput : MonoBehaviour
 
                  if(timeCor[i].GetComponent<BasePeca>().Cordenada == hit.collider.gameObject.name){
                      pecaSelected = timeCor[i];
+                     BasePeca.ClearEfect(moveEfect.transform,captureEfect.transform);
+                     pecaSelected.GetComponent<BasePeca>().EfeitosCasasPosiveis(pecaSelected.GetComponent<BasePeca>(),tabuleiro,moveEfect.transform,captureEfect.transform);
                      mover = false;
                      i = timeCor.Count;
 
@@ -81,18 +89,25 @@ public class PlayerInput : MonoBehaviour
 
             if(mover){
 
-                for(int i = 0;i < timeCorOposta.Count;i++){
+                string destino = pecaSelected.GetComponent<BasePeca>().MoveTipo(pecaSelected.GetComponent<BasePeca>(),hit.collider.GetComponent<Casa>(),tabuleiro);
 
-                    if(hit.collider.gameObject.name == timeCorOposta[i].GetComponent<BasePeca>().Cordenada){
-                        timeCorOposta[i].gameObject.SetActive(false);
-                        timeCorOposta.RemoveAt(i);
-                    }
+                if(pecaSelected.GetComponent<BasePeca>().Cordenada != destino){
 
-                }            
+                    for(int i = 0;i < timeCorOposta.Count;i++){
 
-            pecaSelected.GetComponent<BasePeca>().Cordenada = hit.collider.gameObject.name; //pecaSelected.MoveTipo(pecaSelected,hit.collider.gameObject.name,jogadas);
-            pecaSelected = null;
-            jogadas++;
+                        if(hit.collider.gameObject.name == timeCorOposta[i].GetComponent<BasePeca>().Cordenada){
+                            timeCorOposta[i].gameObject.SetActive(false);
+                            timeCorOposta.RemoveAt(i);
+                        }
+
+                    }           
+               
+                    pecaSelected.GetComponent<BasePeca>().Cordenada = destino;
+                    tabuleiro.SetaPecasInCord();
+                    BasePeca.ClearEfect(moveEfect.transform,captureEfect.transform);
+                    pecaSelected = null;
+                    jogadas++;
+                }
 
             }
 
