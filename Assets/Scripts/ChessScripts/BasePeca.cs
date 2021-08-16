@@ -15,6 +15,8 @@ public class BasePeca : MonoBehaviour
 
     public bool movimentada = false;
 
+    nada = nada;
+
     public string Cordenada { get => cordenada; set => cordenada = value; }
 
     public enum Cor{branco,preto}
