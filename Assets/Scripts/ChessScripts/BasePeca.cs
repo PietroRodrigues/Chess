@@ -10,12 +10,12 @@ public class BasePeca : MonoBehaviour
     Torre torre = new Torre();
     Dama dama = new Dama();
     Rei rei = new Rei();
+    
+    
 
     [SerializeField] private string cordenada;
 
     public bool movimentada = false;
-
-    nada = nada;
 
     public string Cordenada { get => cordenada; set => cordenada = value; }
 

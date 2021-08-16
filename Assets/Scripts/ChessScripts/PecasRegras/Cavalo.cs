@@ -47,6 +47,8 @@ public class Cavalo : conversorCord
      
         }
 
+        
+
         //Add Regra de Movimento-----------
         for (int i = 0; i < casasDispo.Length; i++)
         {

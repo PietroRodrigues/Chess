@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tabuleiro : MonoBehaviour
 {
+    
     [SerializeField] bool ViewCord;
     [SerializeField] Transform tabuleiro = null;
     char[] letras = {'a','b','c','d','e','f','g','h'};
@@ -18,7 +19,7 @@ public class Tabuleiro : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+      
          NomeiaCasas();
 
          PosicionaPecaInicial();
@@ -153,6 +154,7 @@ public class Tabuleiro : MonoBehaviour
         }
 
         foreach (Casa c in houses){
+        
         
             foreach (Transform peca in pecasBrancas)
             {
