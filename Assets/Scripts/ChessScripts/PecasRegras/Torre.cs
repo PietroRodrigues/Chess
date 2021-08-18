@@ -27,6 +27,7 @@ public class Torre : conversorCord
         RegraMovimentes(peca,casasDispoS,casaTG);
         RegraMovimentes(peca,casasDispoO,casaTG);
         RegraMovimentes(peca,casasDispoL,casaTG);
+        
         //---------------------------------
         return destino;
 

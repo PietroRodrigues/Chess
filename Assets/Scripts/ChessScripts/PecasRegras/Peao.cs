@@ -4,79 +4,44 @@ using UnityEngine;
 
 public class Peao : conversorCord
 {
+    string destino;
+
+    Casa[] casasDispoN;
+    Casa[] casasDispoS;
+    Casa[] casasDispoNL;
+    Casa[] casasDispoSO;
+    Casa[] casasDispoNO;
+    Casa[] casasDispoSL;
+
 
     public string Mover(BasePeca peca,Casa casaTG,Tabuleiro jogo){
-        
-        string destino = peca.Cordenada;
 
-        Vector2 v2CasaTG = CordToVector(casaTG.CasaCord);
-        Vector2 v2Peca = CordToVector(peca.Cordenada);
-        Casa[] casasDispo = new Casa[2];
-        Casa[] casasDispoCap = new Casa[2];
-        int  um = 0, dois = 0;
+        int n = (peca.movimentada)? 1 : 2;
+        
+        destino = peca.Cordenada;
 
         if(peca.cor == BasePeca.Cor.branco){
-            um = 1;
-            dois = 2;
-        }else if(peca.cor == BasePeca.Cor.preto){
-            um = -1;
-            dois = -2;
-        }
-
-        for (int i = 0; i < jogo.houses.Count; i++)
-        {
-            if(jogo.houses[i].CasaCord[0] == peca.Cordenada[0] &&
-            CordToVector(jogo.houses[i].CasaCord).y == v2Peca.y + um){
-                casasDispo[0] =  jogo.houses[i];               
-            }
-
-            if(jogo.houses[i].CasaCord[0] == peca.Cordenada[0] &&
-            CordToVector(jogo.houses[i].CasaCord).y == v2Peca.y + dois){
-                casasDispo[1] =  jogo.houses[i];               
-            }
-    
-            if(CordToVector(jogo.houses[i].CasaCord).x == v2Peca.x + 1 &&
-            CordToVector(jogo.houses[i].CasaCord).y == v2Peca.y + um){
-                casasDispoCap[0] =  jogo.houses[i];               
-            }
-
-            if(CordToVector(jogo.houses[i].CasaCord).x == v2Peca.x - 1 &&
-            CordToVector(jogo.houses[i].CasaCord).y == v2Peca.y + um){
-                casasDispoCap[1] =  jogo.houses[i];               
-            }
-
-        }
+            casasDispoN = new Casa[n];
+            casasDispoNL = new Casa[1];
+            casasDispoNO = new Casa[1];
+        }else{
+            casasDispoS = new Casa[n];      
+            casasDispoSO = new Casa[1];
+            casasDispoSL = new Casa[1];
+        }             
         
+        ScanCasasPosiveis(jogo, peca);
+
         //Regra de Movimento-----------
-           
-        if(casaTG.CasaCord == casasDispo[0].CasaCord){
-            if(casasDispo[0].hospede == null){
-                peca.movimentada = true;
-                destino = casaTG.CasaCord;
-            }
-        }
-
-        if(peca.movimentada == false){
-            if(casaTG.CasaCord == casasDispo[1].CasaCord){
-                if(casasDispo[0].hospede == null && 
-                   casasDispo[1].hospede == null){
-                    peca.movimentada = true;
-                    destino = casaTG.CasaCord;
-                }
-            }
-        }
-        
-        for (int i = 0; i < casasDispoCap.Length; i++){
-            if(casasDispoCap[i] != null){
-                if(casaTG.CasaCord == casasDispoCap[i].CasaCord){
-                    if(casasDispoCap[i].hospede != null && casasDispoCap[i].hospede.cor != peca.cor){
-                        peca.movimentada = true;
-                        destino = casaTG.CasaCord;
-                    }
-                }
-            }
-        }            
-                     
+        if(peca.cor == BasePeca.Cor.branco){
+            RegraMovimentes(peca,casasDispoN,casaTG);
+            RegraMovimentes(peca,casasDispoNL,casaTG);
+            RegraMovimentes(peca,casasDispoNO,casaTG);
+        }else{
+            RegraMovimentes(peca,casasDispoS,casaTG);
+            RegraMovimentes(peca,casasDispoSO,casaTG);      
+            RegraMovimentes(peca,casasDispoSL,casaTG);
+        }                    
         //---------------------------------
                 
         return destino;
@@ -85,77 +50,161 @@ public class Peao : conversorCord
 
     public void EfectAtive(BasePeca peca,Tabuleiro jogo,Transform EfectMove,Transform EfectCapture){
 
-        Vector2 v2Peca = CordToVector(peca.Cordenada);
-        Casa[] casasDispo = new Casa[2];
-        Casa[] casasDispoCap = new Casa[2];
-        int  um = 0, dois = 0;
+        int n = (peca.movimentada)? 1 : 2;
 
         if(peca.cor == BasePeca.Cor.branco){
-            um = 1;
-            dois = 2;
-        }else if(peca.cor == BasePeca.Cor.preto){
-            um = -1;
-            dois = -2;
+            casasDispoN = new Casa[n];
+            casasDispoNL = new Casa[1];
+            casasDispoNO = new Casa[1];
+        }else{
+            casasDispoS = new Casa[n];        
+            casasDispoSO = new Casa[1];        
+            casasDispoSL = new Casa[1];        
         }
 
-        for (int i = 0; i < jogo.houses.Count; i++)
-        {
-            if(jogo.houses[i].CasaCord[0] == peca.Cordenada[0] &&
-            CordToVector(jogo.houses[i].CasaCord).y == v2Peca.y + um){
-                casasDispo[0] =  jogo.houses[i];               
-            }
+        ScanCasasPosiveis(jogo, peca);
 
-            if(jogo.houses[i].CasaCord[0] == peca.Cordenada[0] &&
-            CordToVector(jogo.houses[i].CasaCord).y == v2Peca.y + dois){
-                casasDispo[1] =  jogo.houses[i];               
-            }
-
-            if(CordToVector(jogo.houses[i].CasaCord).x == v2Peca.x + 1 &&
-            CordToVector(jogo.houses[i].CasaCord).y == v2Peca.y + um){
-                casasDispoCap[0] =  jogo.houses[i];               
-            }
-
-            if(CordToVector(jogo.houses[i].CasaCord).x == v2Peca.x - 1 &&
-            CordToVector(jogo.houses[i].CasaCord).y == v2Peca.y + um){
-                casasDispoCap[1] =  jogo.houses[i];               
-            }
-
+        if(peca.cor == BasePeca.Cor.branco){
+            EfectsDistribuite(peca,casasDispoN,EfectMove,EfectCapture);
+            EfectsDistribuite(peca,casasDispoNL,EfectMove,EfectCapture);
+            EfectsDistribuite(peca,casasDispoNO,EfectMove,EfectCapture);
+        }else{
+            EfectsDistribuite(peca,casasDispoS,EfectMove,EfectCapture);        
+            EfectsDistribuite(peca,casasDispoSO,EfectMove,EfectCapture);
+            EfectsDistribuite(peca,casasDispoSL,EfectMove,EfectCapture);
         }
-
-        for (int i = 0; i < casasDispo.Length; i++)
-        {   
-            if(casasDispo[i] != null){         
-                if(casasDispo[i].hospede == null){
-
-                    Transform  efect = EfectMove.GetChild(i);
-                    efect.position = casasDispo[i].transform.position;
-                    efect.gameObject.SetActive(true);
-                    
-                    if(peca.movimentada)
-                        i=casasDispo.Length;
-
-                }else{
-                    i=casasDispo.Length;
-                }
-            }
-
-        }
-
-        for (int i = 0; i < casasDispoCap.Length; i++)
-        {
-            if(casasDispoCap[i] != null){
-                if(casasDispoCap[i].hospede != null && casasDispoCap[i].hospede.cor != peca.cor){
-                    
-                    Transform efect = EfectCapture.GetChild(i);                    
-                    efect.position = casasDispoCap[i].transform.position;
-                    efect.gameObject.SetActive(true);
-
-                }
-            }
-
-        }     
 
     }
 
+    void ScanCasasPosiveis(Tabuleiro jogo,BasePeca peca){
+
+        Vector2 v2Peca = CordToVector(peca.Cordenada);
+
+        for(int i = 0;i < jogo.houses.Count;i++){
+
+            Vector2 v2houses = CordToVector(jogo.houses[i].CasaCord);
+                       
+            if(peca.cor == BasePeca.Cor.branco){
+                for (int j = 0; j < casasDispoN.Length; j++)
+                {
+                    if(v2houses.x == v2Peca.x && v2houses.y == v2Peca.y + (1+j)){
+                        if(jogo.houses[i].hospede == null)
+                            casasDispoN[j] = jogo.houses[i];
+                    }
+                }
+                for (int j = 0; j < casasDispoNL.Length; j++)
+                {
+                    if(v2houses.x == v2Peca.x + (1+j) && v2houses.y == v2Peca.y + (1+j)){
+                        if(jogo.houses[i].hospede != null && jogo.houses[i].hospede.cor != peca.cor)
+                        casasDispoNL[j] = jogo.houses[i];
+                    }
+
+                }
+                for (int j = 0; j < casasDispoNO.Length; j++)
+                {
+                    if(v2houses.x == v2Peca.x - (1+j) && v2houses.y == v2Peca.y + (1+j)){
+                        if(jogo.houses[i].hospede != null && jogo.houses[i].hospede.cor != peca.cor)
+                        casasDispoNO[j] = jogo.houses[i];
+                    }
+
+                }
+            }else{
+                for (int j = 0; j < casasDispoS.Length; j++)
+                {
+                    if(v2houses.x == v2Peca.x && v2houses.y == v2Peca.y - (1+j)){
+                        if(jogo.houses[i].hospede == null)
+                            casasDispoS[j] = jogo.houses[i];
+                    }
+                }
+                for (int j = 0; j < casasDispoSO.Length; j++)
+                {
+                    if(v2houses.x == v2Peca.x - (1+j) && v2houses.y == v2Peca.y - (1+j)){
+                        if(jogo.houses[i].hospede != null && jogo.houses[i].hospede.cor != peca.cor)
+                        casasDispoSO[j] = jogo.houses[i];
+                    }
+
+                }
+                
+                for (int j = 0; j < casasDispoSL.Length; j++)
+                {
+                    if(v2houses.x == v2Peca.x + (1+j) && v2houses.y == v2Peca.y - (1+j)){
+                        if(jogo.houses[i].hospede != null && jogo.houses[i].hospede.cor != peca.cor)
+                        casasDispoSL[j] = jogo.houses[i];
+                    }
+                }
+            }
+        }
+    }
+
+    void EfectsDistribuite(BasePeca peca,Casa[] casaDirection,Transform EfectMove,Transform EfectCapture){
+
+        for (int i = 0; i < casaDirection.Length; i++)
+        {            
+            if(casaDirection[i] != null){         
+                if(casaDirection[i].hospede == null){
+                    
+                    for (int j = 0; j < EfectMove.childCount; j++)
+                    {
+                        if(!EfectMove.GetChild(j).gameObject.activeSelf){                
+                            Transform  efect = EfectMove.GetChild(j);
+                            efect.position = casaDirection[i].transform.position;
+                            efect.gameObject.SetActive(true);
+                            j = EfectMove.childCount;
+                        }    
+                    }           
+
+                }else{
+
+                    if(casaDirection[i].hospede.cor != peca.cor){
+                        
+                        for (int j = 0; j < EfectCapture.childCount; j++)
+                        {
+                            if(!EfectCapture.GetChild(j).gameObject.activeSelf){                
+                                Transform  efect = EfectCapture.GetChild(j);
+                                efect.position = casaDirection[i].transform.position;
+                                efect.gameObject.SetActive(true);
+                                j = EfectMove.childCount;
+                                i = casaDirection.Length;
+                            }    
+                        }
+
+                    }else{
+                        i = casaDirection.Length;
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+    void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){
+
+        for (int i = 0; i < casaDirection.Length; i++)
+        {
+            if(casaDirection[i] != null){         
+                if(casaDirection[i].hospede == null){
+                    if(casaDirection[i].CasaCord == casaTG.CasaCord){
+                        peca.movimentada = true;
+                        destino = casaTG.CasaCord;
+                    }
+                }else{
+                    if(casaDirection[i].hospede.cor != peca.cor){
+                        
+                        if(casaDirection[i].CasaCord == casaTG.CasaCord){
+                            peca.movimentada = true;
+                            destino = casaTG.CasaCord;
+                        }else{
+                            i = casaDirection.Length;
+                        }
+
+                    }else{
+                        i = casaDirection.Length;
+                    }
+                }
+            }
+        }
+    }  
 
 }
