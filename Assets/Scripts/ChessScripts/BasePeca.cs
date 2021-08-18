@@ -9,8 +9,7 @@ public class BasePeca : MonoBehaviour
     Cavalo cavalo = new Cavalo();
     Torre torre = new Torre();
     Dama dama = new Dama();
-    Rei rei = new Rei();
-    
+    Rei rei = new Rei();    
     
 
     [SerializeField] private string cordenada;
