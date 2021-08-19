@@ -88,8 +88,7 @@ public class Peao : conversorCord
                 for (int j = 0; j < casasDispoN.Length; j++)
                 {
                     if(v2houses.x == v2Peca.x && v2houses.y == v2Peca.y + (1+j)){
-                        if(jogo.houses[i].hospede == null)
-                            casasDispoN[j] = jogo.houses[i];
+                        casasDispoN[j] = jogo.houses[i];
                     }
                 }
                 for (int j = 0; j < casasDispoNL.Length; j++)
@@ -112,8 +111,7 @@ public class Peao : conversorCord
                 for (int j = 0; j < casasDispoS.Length; j++)
                 {
                     if(v2houses.x == v2Peca.x && v2houses.y == v2Peca.y - (1+j)){
-                        if(jogo.houses[i].hospede == null)
-                            casasDispoS[j] = jogo.houses[i];
+                        casasDispoS[j] = jogo.houses[i];
                     }
                 }
                 for (int j = 0; j < casasDispoSO.Length; j++)
@@ -155,7 +153,7 @@ public class Peao : conversorCord
 
                 }else{
 
-                    if(casaDirection[i].hospede.cor != peca.cor){
+                    if(casaDirection[i].hospede.cor != peca.cor && casaDirection[i].hospede.Cordenada[0] != peca.Cordenada[0]){
                         
                         for (int j = 0; j < EfectCapture.childCount; j++)
                         {
