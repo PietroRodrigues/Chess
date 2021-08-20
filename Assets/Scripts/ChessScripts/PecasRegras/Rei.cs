@@ -154,7 +154,7 @@ public class Rei : conversorCord
         for (int i = 0; i < casaDirection.Length; i++)
         {
             if(casaDirection[i] != null){         
-                if(casaDirection[i].hospede == null){
+                if(casaDirection[i].hospede == null || casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){
                     if(casaDirection[i].CasaCord == casaTG.CasaCord){
                         if(casaTG.CasaCord[0] == 'c' &&  !peca.movimentada && !torres[0].movimentada){
 
@@ -176,16 +176,15 @@ public class Rei : conversorCord
                         }
                     }
                 }else{
-                    if(casaDirection[i].hospede.cor != peca.cor ){
-                        
-                        Debug.Log("Arrumar peça inimiga entre o roque");
-
+                   
+                    if(i == 0 && casaDirection[i].hospede.cor != peca.cor ){
+                                               
                         if(casaDirection[i].CasaCord == casaTG.CasaCord){
                             peca.movimentada = true;
                             destino = casaTG.CasaCord;
                         }else{
                             i = casaDirection.Length;
-                        }
+                        }                        
 
                     }else{
                         i = casaDirection.Length;
@@ -200,7 +199,7 @@ public class Rei : conversorCord
         for (int i = 0; i < casaDirection.Length; i++)
         {            
             if(casaDirection[i] != null){         
-                if(casaDirection[i].hospede == null){
+                if(casaDirection[i].hospede == null || casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){
                     
                     for (int j = 0; j < EfectMove.childCount; j++)
                     {
@@ -214,7 +213,7 @@ public class Rei : conversorCord
 
                 }else{
 
-                    if(casaDirection[i].hospede.cor != peca.cor){
+                    if(i == 0 && casaDirection[i].hospede.cor != peca.cor){
                         
                         for (int j = 0; j < EfectCapture.childCount; j++)
                         {

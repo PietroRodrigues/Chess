@@ -39,9 +39,9 @@ public class PlayerInput : MonoBehaviour
             if(Input.GetMouseButtonDown(0)){
 
                 if((int)(jogadas % 2) == 0){
-                    pecasMove(tabuleiro.pecasPretas,tabuleiro.pecasBrancas);
+                    pecasMove(tabuleiro.pecasPretas,tabuleiro.pecasBrancas);                    
                 }else{
-                    pecasMove(tabuleiro.pecasBrancas,tabuleiro.pecasPretas);
+                    pecasMove(tabuleiro.pecasBrancas,tabuleiro.pecasPretas);                   
                 }
 
             }
@@ -51,6 +51,18 @@ public class PlayerInput : MonoBehaviour
             mouseEfect.gameObject.SetActive(false);
 
         }
+    }
+
+    void ClearEnPassant(List<Transform> timeCorOpsota){
+        
+        for (int i = 0; i < timeCorOpsota.Count; i++)
+        {
+            if(timeCorOpsota[i].GetComponent<BasePeca>().enPassantAlvo != null){
+                Destroy(timeCorOpsota[i].GetComponent<BasePeca>().enPassantAlvo);
+                timeCorOpsota[i].GetComponent<BasePeca>().enPassantAlvo = null;
+            }
+        }
+
     }
     
     void pecasMove(List<Transform> timeCor, List<Transform> timeCorOposta){
@@ -97,7 +109,6 @@ public class PlayerInput : MonoBehaviour
 
                         if(hit.collider.gameObject.name == timeCorOposta[i].GetComponent<BasePeca>().Cordenada){
                             timeCorOposta[i].gameObject.SetActive(false);
-                            timeCorOposta.RemoveAt(i);
                         }
 
                     }           
@@ -106,13 +117,22 @@ public class PlayerInput : MonoBehaviour
                     tabuleiro.SetaPecasInCord();
                     BasePeca.ClearEfect(moveEfect.transform,captureEfect.transform);
                     pecaSelected = null;
+
+                    if((int)(jogadas % 2) == 0){                   
+                        ClearEnPassant(tabuleiro.pecasBrancas);
+                    }else{
+                        ClearEnPassant(tabuleiro.pecasPretas);
+                    }
+
                     jogadas++;
+ 
+                    
                 }
 
             }
 
          }
 
-    }
+    }   
 
 }

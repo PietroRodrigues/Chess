@@ -184,13 +184,44 @@ public class Peao : conversorCord
             if(casaDirection[i] != null){         
                 if(casaDirection[i].hospede == null){
                     if(casaDirection[i].CasaCord == casaTG.CasaCord){
+                        
+                        if(i == 1){
+                            peca.enPassantAlvo = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+                            if(peca.enPassantAlvo.GetComponent<MeshRenderer>() != null)
+                            GameObject.Destroy(peca.enPassantAlvo.GetComponent<MeshRenderer>());
+
+                            if(peca.enPassantAlvo.GetComponent<BoxCollider>() != null)
+                            GameObject.Destroy(peca.enPassantAlvo.GetComponent<BoxCollider>());
+
+                            if(peca.enPassantAlvo.GetComponent<BasePeca>() == null){
+                                peca.enPassantAlvo.AddComponent<BasePeca>();                            
+                            }
+                            
+                            peca.enPassantAlvo.GetComponent<BasePeca>().gameObject.name = "enPassantAlvo";
+                            peca.enPassantAlvo.GetComponent<BasePeca>().Cordenada = casaDirection[0].CasaCord;
+                            casaDirection[0].hospede =  peca.enPassantAlvo.GetComponent<BasePeca>();
+                            peca.enPassantAlvo.GetComponent<BasePeca>().peaoVinculo = peca;
+                            peca.enPassantAlvo.GetComponent<BasePeca>().cor = peca.cor;
+                            peca.enPassantAlvo.GetComponent<BasePeca>().tipo = BasePeca.Tipo.sombra;
+                            
+
+                            peca.enPassantAlvo.transform.position = casaDirection[0].transform.position;
+                        }
+
+                        
                         peca.movimentada = true;
                         destino = casaTG.CasaCord;
+
                     }
                 }else{
                     if(casaDirection[i].hospede.cor != peca.cor){
-                        
+                                                
                         if(casaDirection[i].CasaCord == casaTG.CasaCord){
+                        
+                            if(casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){    
+                                casaDirection[i].hospede.peaoVinculo.gameObject.SetActive(false);                           
+                            }
                             peca.movimentada = true;
                             destino = casaTG.CasaCord;
                         }else{

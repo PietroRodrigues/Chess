@@ -9,19 +9,20 @@ public class BasePeca : MonoBehaviour
     Cavalo cavalo = new Cavalo();
     Torre torre = new Torre();
     Dama dama = new Dama();
-    Rei rei = new Rei();    
-    
+    Rei rei = new Rei();   
 
     [SerializeField] private string cordenada;
 
     public bool movimentada = false;
+    public GameObject enPassantAlvo = null;
+    public BasePeca peaoVinculo = null;
 
     public string Cordenada { get => cordenada; set => cordenada = value; }
 
     public enum Cor{branco,preto}
     public Cor cor;
 
-    public enum Tipo{peao, torre, cavalo,bispo, dama, rei}
+    public enum Tipo{peao, torre, cavalo,bispo, dama, rei,sombra}
     public Tipo tipo;
 
     public string MoveTipo(BasePeca peca,Casa casaTG,Tabuleiro jogo){

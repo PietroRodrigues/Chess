@@ -150,7 +150,9 @@ public class Tabuleiro : MonoBehaviour
     public void SetaPecasInCord(){
 
         foreach (Casa c in houses){
-             c.hospede = null;
+            if(c.hospede != null)
+                if(c.hospede.tipo != BasePeca.Tipo.sombra)
+                    c.hospede = null;
         }
 
         foreach (Casa c in houses){

@@ -98,7 +98,7 @@ public class Bispo : conversorCord
         for (int i = 0; i < casaDirection.Length; i++)
         {
             if(casaDirection[i] != null){         
-                if(casaDirection[i].hospede == null){
+                if(casaDirection[i].hospede == null || casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){
                     if(casaDirection[i].CasaCord == casaTG.CasaCord){
                         peca.movimentada = true;
                         destino = casaTG.CasaCord;
@@ -126,7 +126,7 @@ public class Bispo : conversorCord
         for (int i = 0; i < casaDirection.Length; i++)
         {            
             if(casaDirection[i] != null){         
-                if(casaDirection[i].hospede == null){
+                if(casaDirection[i].hospede == null || casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){
                     
                     for (int j = 0; j < EfectMove.childCount; j++)
                     {

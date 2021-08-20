@@ -121,7 +121,7 @@ public class Cavalo : conversorCord
         for (int i = 0; i < casasDispo.Length; i++)
         {
             if(casasDispo[i] != null){
-                if(casasDispo[i].hospede == null){
+                if(casasDispo[i].hospede == null || casasDispo[i].hospede.tipo == BasePeca.Tipo.sombra){
                     
                     Transform  efect = EfectMove.GetChild(i);
                     efect.position = casasDispo[i].transform.position;

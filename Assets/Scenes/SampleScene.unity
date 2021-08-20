@@ -273,6 +273,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1234764472153761784, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748055630862490073, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123436516765446961, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158207151532620120, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998864444471702084, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7966343920702582675, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
       propertyPath: m_Name
       value: PecasBrancas
@@ -320,6 +340,10 @@ PrefabInstance:
     - target: {fileID: 7966343920702582684, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091335380340899768, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 669039231, guid: 74b0344d978ca064ba8827c04af9e683, type: 3}
