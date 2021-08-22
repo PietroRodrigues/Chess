@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Torre : conversorCord
+public class Torre : XadrezProperts
 {
     string destino;
 
@@ -86,9 +86,28 @@ public class Torre : conversorCord
                 }
 
             }
-
         }
     }
+
+    public bool ScanerCheck(Tabuleiro jogo,BasePeca peca){
+        
+        bool check = false;
+
+        casasDispoN = new Casa[7];
+        casasDispoS = new Casa[7];
+        casasDispoO = new Casa[7];
+        casasDispoL = new Casa[7];
+
+        ScanCasasPosiveis(jogo, peca);
+
+        check = (!check)? ScanAtacks(casasDispoL,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoN,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoO,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoS,peca) : true;
+
+        return check;
+
+    }    
 
     void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){      
 

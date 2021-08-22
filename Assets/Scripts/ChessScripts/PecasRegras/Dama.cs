@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dama : conversorCord
+public class Dama : XadrezProperts
 {   
     string destino;
 
@@ -137,8 +137,37 @@ public class Dama : conversorCord
         }
     }
 
-    void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){      
+     public bool ScanerCheck(Tabuleiro jogo,BasePeca peca){
+        
+        bool check = false;
 
+        casasDispoN = new Casa[7];
+        casasDispoS = new Casa[7];
+        casasDispoO = new Casa[7];
+        casasDispoL = new Casa[7];
+        casasDispoNL = new Casa[7];
+        casasDispoSO = new Casa[7];
+        casasDispoNO = new Casa[7];
+        casasDispoSL = new Casa[7];
+
+        ScanCasasPosiveis(jogo, peca);
+
+        check = (!check)? ScanAtacks(casasDispoL,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoN,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoO,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoS,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoNL,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoNO,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoSL,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoSO,peca) : true;
+
+
+        return check;
+
+    }
+
+   
+    void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){
 
         for (int i = 0; i < casaDirection.Length; i++)
         {

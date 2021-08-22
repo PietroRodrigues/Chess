@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rei : conversorCord
+public class Rei : XadrezProperts
 {    
     string destino;
 
@@ -16,6 +16,9 @@ public class Rei : conversorCord
     Casa[] casasDispoSO;
     Casa[] casasDispoNO;
     Casa[] casasDispoSL;
+
+    public bool check = false;
+    public bool checkMate = false;
 
     public string Mover(BasePeca peca,Casa casaTG,Tabuleiro jogo){
         
@@ -148,6 +151,35 @@ public class Rei : conversorCord
         }
     }
 
+     public bool ScanerCheck(Tabuleiro jogo,BasePeca peca){
+        
+        bool check = false;
+
+        casasDispoN = new Casa[1];
+        casasDispoS = new Casa[1];
+        casasDispoO = new Casa[1];
+        casasDispoL = new Casa[1];
+        casasDispoNL = new Casa[1];
+        casasDispoSO = new Casa[1];
+        casasDispoNO = new Casa[1];
+        casasDispoSL = new Casa[1];
+
+        ScanCasasPosiveis(jogo, peca);
+
+        check = (!check)? ScanAtacks(casasDispoL,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoN,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoO,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoS,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoNL,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoNO,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoSL,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoSO,peca) : true;
+
+
+        return check;
+
+    }
+
     void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){      
 
 
@@ -250,13 +282,41 @@ public class Rei : conversorCord
                     }
                 }
             }
-        }
-        
-      
+        }     
     }
 
-    void Check(){
-        
-    }
+    public void CheckVerific(List<Transform> pecas,Tabuleiro jogo){
+
+            foreach (Transform p in pecas)
+            {
+                BasePeca pecaOposta = p.GetComponent<BasePeca>();
+                if(!this.check){          
+                    switch (pecaOposta.tipo)
+                    {
+                        case BasePeca.Tipo.peao:
+                        this.check = pecaOposta.peao.ScanerCheck(jogo,pecaOposta);
+                        break;
+                        case BasePeca.Tipo.torre:
+                        this.check =  pecaOposta.torre.ScanerCheck(jogo,pecaOposta);
+                        break;
+                        case BasePeca.Tipo.cavalo:
+                        this.check =  pecaOposta.cavalo.ScanerCheck(jogo,pecaOposta);
+                        break;
+                        case BasePeca.Tipo.bispo:
+                        this.check =  pecaOposta.bispo.ScanerCheck(jogo,pecaOposta);
+                        break;
+                        case BasePeca.Tipo.dama:
+                        this.check =  pecaOposta.dama.ScanerCheck(jogo,pecaOposta);
+                        break;
+                        case BasePeca.Tipo.rei:
+                        this.check =  pecaOposta.rei.ScanerCheck(jogo,pecaOposta);
+                        break;                
+                    }
+                }                
+            }
+
+            Debug.Log(this.check);
+
+        }
 
 }

@@ -57,9 +57,9 @@ public class PlayerInput : MonoBehaviour
         
         for (int i = 0; i < timeCorOpsota.Count; i++)
         {
-            if(timeCorOpsota[i].GetComponent<BasePeca>().enPassantAlvo != null){
-                Destroy(timeCorOpsota[i].GetComponent<BasePeca>().enPassantAlvo);
-                timeCorOpsota[i].GetComponent<BasePeca>().enPassantAlvo = null;
+            if(timeCorOpsota[i].GetComponent<BasePeca>().peao.enPassantAlvo != null){
+                Destroy(timeCorOpsota[i].GetComponent<BasePeca>().peao.enPassantAlvo);
+                timeCorOpsota[i].GetComponent<BasePeca>().peao.enPassantAlvo = null;
             }
         }
 
@@ -103,12 +103,20 @@ public class PlayerInput : MonoBehaviour
 
                 string destino = pecaSelected.GetComponent<BasePeca>().MoveTipo(pecaSelected.GetComponent<BasePeca>(),hit.collider.GetComponent<Casa>(),tabuleiro);
 
+                //Verificar c estou em check antes de passar a vez
+
+
                 if(pecaSelected.GetComponent<BasePeca>().Cordenada != destino){
 
                     for(int i = 0;i < timeCorOposta.Count;i++){
 
-                        if(hit.collider.gameObject.name == timeCorOposta[i].GetComponent<BasePeca>().Cordenada){
+                        if(hit.collider.gameObject.name == timeCorOposta[i].GetComponent<BasePeca>().Cordenada){                          
+                            
+                            if(timeCorOposta[i].GetComponent<BasePeca>().peao.enPassantAlvo != null){
+                                Destroy(timeCorOposta[i].GetComponent<BasePeca>().peao.enPassantAlvo);
+                            }
                             timeCorOposta[i].gameObject.SetActive(false);
+                            timeCorOposta.RemoveAt(i);
                         }
 
                     }           
@@ -117,7 +125,7 @@ public class PlayerInput : MonoBehaviour
                     tabuleiro.SetaPecasInCord();
                     BasePeca.ClearEfect(moveEfect.transform,captureEfect.transform);
                     pecaSelected = null;
-
+                    
                     if((int)(jogadas % 2) == 0){                   
                         ClearEnPassant(tabuleiro.pecasBrancas);
                     }else{
@@ -125,13 +133,47 @@ public class PlayerInput : MonoBehaviour
                     }
 
                     jogadas++;
- 
+                    
+                    ClearDominio();
+                    VerificaCheck();
                     
                 }
 
             }
 
-         }
+        }     
+
+
+    }
+
+    void VerificaCheck(){
+       
+        if((int)(jogadas % 2) == 0){
+            foreach (Transform peca in tabuleiro.pecasPretas)
+            {
+                if(peca.GetComponent<BasePeca>().tipo == BasePeca.Tipo.rei)
+                    peca.GetComponent<BasePeca>().rei.CheckVerific(tabuleiro.pecasBrancas,tabuleiro);
+            }                      
+        }else{
+            foreach (Transform peca in tabuleiro.pecasBrancas)
+            {
+                if(peca.GetComponent<BasePeca>().tipo == BasePeca.Tipo.rei)
+                    peca.GetComponent<BasePeca>().rei.CheckVerific(tabuleiro.pecasPretas,tabuleiro);
+            }     
+        }
+
+    }
+
+    void ClearDominio(){
+       foreach (Casa c in tabuleiro.houses)
+       {
+           c.dominio = BasePeca.Cor.neutra;
+                          
+       }
+                          
+    }
+
+    void VerificaMate(){
 
     }   
 

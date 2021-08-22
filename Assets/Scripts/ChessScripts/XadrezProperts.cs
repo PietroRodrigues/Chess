@@ -2,8 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class conversorCord
+public class XadrezProperts
 {
+    public bool ScanAtacks(Casa[] casaDirection, BasePeca peca){
+        return LadoScanAtaks(casaDirection,peca);
+    }
+
+    bool LadoScanAtaks(Casa[] casaDirection, BasePeca peca){
+        
+        foreach (Casa casa in casaDirection)
+        {
+            if(casa != null){
+                if(casa.hospede != null){
+                    if(casa.hospede.cor != peca.cor){
+                        casa.dominio = peca.cor;
+                        if(casa.hospede.tipo == BasePeca.Tipo.rei){
+                            casa.dominio = peca.cor;
+                            return true;  
+                        }else                        
+                            return false;
+                    }else{
+                        casa.dominio = peca.cor;
+                        return false;
+                    }
+                }else{
+                    casa.dominio = peca.cor;
+                }
+            }
+        }
+
+        return false; 
+    }
+
 
     public Vector2 CordToVector(string cord){
 

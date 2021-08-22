@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class BasePeca : MonoBehaviour
 {
-    Peao peao = new Peao();
-    Bispo bispo= new Bispo();
-    Cavalo cavalo = new Cavalo();
-    Torre torre = new Torre();
-    Dama dama = new Dama();
-    Rei rei = new Rei();   
+    public Peao peao = new Peao();
+    public Bispo bispo= new Bispo();
+    public Cavalo cavalo = new Cavalo();
+    public Torre torre = new Torre();
+    public Dama dama = new Dama();
+    public Rei rei = new Rei();   
 
     [SerializeField] private string cordenada;
 
     public bool movimentada = false;
-    public GameObject enPassantAlvo = null;
-    public BasePeca peaoVinculo = null;
-
+        
     public string Cordenada { get => cordenada; set => cordenada = value; }
 
-    public enum Cor{branco,preto}
+    public enum Cor{branco,preto,neutra}
     public Cor cor;
 
     public enum Tipo{peao, torre, cavalo,bispo, dama, rei,sombra}

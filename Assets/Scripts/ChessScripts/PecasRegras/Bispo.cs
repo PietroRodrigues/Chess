@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bispo : conversorCord
+public class Bispo : XadrezProperts
 {   
     string destino;
 
@@ -90,6 +90,27 @@ public class Bispo : conversorCord
             }
 
         }
+    }
+
+    public bool ScanerCheck(Tabuleiro jogo,BasePeca peca){
+        
+        bool check = false;
+
+        casasDispoNL = new Casa[7];
+        casasDispoSO = new Casa[7];
+        casasDispoNO = new Casa[7];
+        casasDispoSL = new Casa[7];
+
+        ScanCasasPosiveis(jogo, peca);
+
+        check = (!check)? ScanAtacks(casasDispoNL,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoNO,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoSL,peca) : true;
+        check = (!check)? ScanAtacks(casasDispoSO,peca) : true;
+
+
+        return check;
+
     }
 
     void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){      
