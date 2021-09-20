@@ -13,9 +13,12 @@ public class BasePeca : MonoBehaviour
 
     [SerializeField] private string cordenada;
 
+    [SerializeField] private string cordInicial;
+
     public bool movimentada = false;
         
     public string Cordenada { get => cordenada; set => cordenada = value; }
+    public string CordInicial { get => cordInicial; set => cordInicial = value; }
 
     public enum Cor{branco,preto,neutra}
     public Cor cor;
@@ -23,6 +26,8 @@ public class BasePeca : MonoBehaviour
     public enum Tipo{peao, torre, cavalo,bispo, dama, rei,sombra}
     public Tipo tipo;
 
+   
+    
     public string MoveTipo(BasePeca peca,Casa casaTG,Tabuleiro jogo){
         
         string cord = "";
@@ -79,6 +84,33 @@ public class BasePeca : MonoBehaviour
            
         }
 
+    }
+
+    public void SetDominio(Tabuleiro jogo){
+
+        switch (this.tipo)
+        {
+            case BasePeca.Tipo.peao:
+             peao.CasasDominio(this,jogo); 
+            break;
+            case BasePeca.Tipo.torre:
+             torre.CasasDominio(this,jogo);
+            break;
+            case BasePeca.Tipo.cavalo:
+             cavalo.CasasDominio(this,jogo);
+            break;
+            case BasePeca.Tipo.bispo:
+             bispo.CasasDominio(this,jogo);
+            break;
+            case BasePeca.Tipo.dama:
+             dama.CasasDominio(this,jogo);
+            break;
+            case BasePeca.Tipo.rei:
+             rei.CasasDominio(this,jogo);
+            break;           
+           
+        }
+        
     }
 
     public static void ClearEfect(Transform EfectMove,Transform EfectCapture){

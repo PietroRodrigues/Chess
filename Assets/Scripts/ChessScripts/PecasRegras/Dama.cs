@@ -6,6 +6,8 @@ public class Dama : XadrezProperts
 {   
     string destino;
 
+    BasePeca King;
+
     Casa[] casasDispoN;
     Casa[] casasDispoS;
     Casa[] casasDispoO;
@@ -16,6 +18,8 @@ public class Dama : XadrezProperts
     Casa[] casasDispoSL;
 
     public string Mover(BasePeca peca,Casa casaTG,Tabuleiro jogo){
+
+        King = GetKing(jogo,peca.cor);
         
         destino = peca.Cordenada;
 
@@ -46,6 +50,8 @@ public class Dama : XadrezProperts
 
     }
     public void EfectAtive(BasePeca peca,Tabuleiro jogo,Transform EfectMove,Transform EfectCapture){
+
+        King = GetKing(jogo,peca.cor);
 
         casasDispoN = new Casa[7];
         casasDispoS = new Casa[7];
@@ -137,9 +143,7 @@ public class Dama : XadrezProperts
         }
     }
 
-     public bool ScanerCheck(Tabuleiro jogo,BasePeca peca){
-        
-        bool check = false;
+    public void CasasDominio(BasePeca peca,Tabuleiro jogo){
 
         casasDispoN = new Casa[7];
         casasDispoS = new Casa[7];
@@ -152,20 +156,16 @@ public class Dama : XadrezProperts
 
         ScanCasasPosiveis(jogo, peca);
 
-        check = (!check)? ScanAtacks(casasDispoL,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoN,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoO,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoS,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoNL,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoNO,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoSL,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoSO,peca) : true;
-
-
-        return check;
+        ApliqueDominio(peca,casasDispoN);
+        ApliqueDominio(peca,casasDispoS);
+        ApliqueDominio(peca,casasDispoO);
+        ApliqueDominio(peca,casasDispoL);
+        ApliqueDominio(peca,casasDispoNL);
+        ApliqueDominio(peca,casasDispoSO);
+        ApliqueDominio(peca,casasDispoNO);
+        ApliqueDominio(peca,casasDispoSL);
 
     }
-
    
     void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){
 

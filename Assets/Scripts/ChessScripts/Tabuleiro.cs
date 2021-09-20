@@ -6,24 +6,27 @@ public class Tabuleiro : MonoBehaviour
 {
     
     [SerializeField] bool ViewCord;
+    [SerializeField] bool viewDominioEfect = false;
     [SerializeField] Transform tabuleiro = null;
     char[] letras = {'a','b','c','d','e','f','g','h'};
     char[] numeros = {'1','2','3','4','5','6','7','8'};
     string[,] housesName = new string[8,8];
     public List<Transform> pecasBrancas = null;
     public List<Transform> pecasPretas = null;
+    [HideInInspector] public BasePeca reiBranco;
+    [HideInInspector] public BasePeca reiPreto;
+    [HideInInspector] public int jogadas = 1;
     public List<Casa> houses = null;
     Dictionary<string,Vector2> casas = new Dictionary<string, Vector2>();  
     int indc;
+    [SerializeField] GameObject dominioEfect = null;
+    
 
     // Start is called before the first frame update
     void Start()
-    {
-      
+    {      
          NomeiaCasas();
-
-         PosicionaPecaInicial();
-        
+         PosicionaPecaInicial();            
 
     }
 
@@ -31,6 +34,21 @@ public class Tabuleiro : MonoBehaviour
     void Update()
     {
         HudView();
+        EfectDominioView();
+        SetKings();
+    }
+
+    void SetKings(){
+        foreach (Transform pecas in pecasBrancas)
+        {
+            if(pecas.GetComponent<BasePeca>().tipo == BasePeca.Tipo.rei)
+                reiBranco = pecas.GetComponent<BasePeca>();
+        }
+        foreach (Transform pecas in pecasPretas)
+        {
+            if(pecas.GetComponent<BasePeca>().tipo == BasePeca.Tipo.rei)
+                reiPreto = pecas.GetComponent<BasePeca>();
+        }   
     }
 
     void NomeiaCasas(){
@@ -52,6 +70,40 @@ public class Tabuleiro : MonoBehaviour
 
             }
          }
+
+    }
+
+     void EfectDominioView(){
+        if(viewDominioEfect){
+            foreach (Casa casa in houses)
+            {
+                if(casa.dominio != BasePeca.Cor.neutra){
+                    for(int i = 0; i < dominioEfect.transform.childCount;i++){
+                        if(!dominioEfect.transform.GetChild(i).gameObject.activeSelf){
+                            
+                            dominioEfect.transform.GetChild(i).transform.position = casa.transform.position;
+                            dominioEfect.transform.GetChild(i).gameObject.SetActive(true);
+                            i = dominioEfect.transform.childCount;
+                        }
+                    }
+                }
+                    
+            }
+        }else{
+
+            ClearDominioEfects();
+            
+        }
+    }
+
+    public void ClearDominioEfects(){
+
+        for(int i = 0; i < dominioEfect.transform.childCount;i++){
+            if(dominioEfect.transform.GetChild(i).gameObject.activeSelf){
+                dominioEfect.transform.GetChild(i).transform.position = dominioEfect.transform.position;
+                dominioEfect.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
 
     }
 
@@ -89,6 +141,7 @@ public class Tabuleiro : MonoBehaviour
                          
                          houses[w].hospede =  pecasBrancas[i].GetComponent<BasePeca>();
                          houses[w].hospede.Cordenada = houses[w].CasaCord;
+                         pecasBrancas[i].GetComponent<BasePeca>().CordInicial = houses[w].CasaCord;                         
                          houses[w].hospede.tipo = SetTipo(houses[w].hospede);                        
 
                      }
@@ -114,6 +167,7 @@ public class Tabuleiro : MonoBehaviour
 
                          houses[w].hospede =  pecasPretas[i].GetComponent<BasePeca>();
                          houses[w].hospede.Cordenada =  houses[w].CasaCord;
+                         pecasPretas[i].GetComponent<BasePeca>().CordInicial = houses[w].CasaCord; 
                          houses[w].hospede.tipo = SetTipo(houses[w].hospede);
 
                      }

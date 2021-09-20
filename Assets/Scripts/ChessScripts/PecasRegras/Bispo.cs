@@ -6,13 +6,17 @@ public class Bispo : XadrezProperts
 {   
     string destino;
 
+    BasePeca King;
+
     Casa[] casasDispoNL;
     Casa[] casasDispoSO;
     Casa[] casasDispoNO;
     Casa[] casasDispoSL;
 
     public string Mover(BasePeca peca,Casa casaTG,Tabuleiro jogo){
-               
+
+        King = GetKing(jogo,peca.cor);
+
         destino = peca.Cordenada;
 
         //Add Regra de Movimento-----------
@@ -37,6 +41,8 @@ public class Bispo : XadrezProperts
     }
 
     public void EfectAtive(BasePeca peca,Tabuleiro jogo,Transform EfectMove,Transform EfectCapture){
+
+        King = GetKing(jogo,peca.cor);
 
         casasDispoNL = new Casa[7];
         casasDispoSO = new Casa[7];
@@ -92,9 +98,7 @@ public class Bispo : XadrezProperts
         }
     }
 
-    public bool ScanerCheck(Tabuleiro jogo,BasePeca peca){
-        
-        bool check = false;
+    public void CasasDominio(BasePeca peca,Tabuleiro jogo){
 
         casasDispoNL = new Casa[7];
         casasDispoSO = new Casa[7];
@@ -103,15 +107,12 @@ public class Bispo : XadrezProperts
 
         ScanCasasPosiveis(jogo, peca);
 
-        check = (!check)? ScanAtacks(casasDispoNL,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoNO,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoSL,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoSO,peca) : true;
+        ApliqueDominio(peca,casasDispoNL);
+        ApliqueDominio(peca,casasDispoSO);
+        ApliqueDominio(peca,casasDispoNO);
+        ApliqueDominio(peca,casasDispoSL);
 
-
-        return check;
-
-    }
+    }   
 
     void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){      
 

@@ -5,12 +5,16 @@ using UnityEngine;
 public class Cavalo : XadrezProperts
 {    
      string destino ;
-    
+     
+     BasePeca King;
+
      Casa[] casasDispo;    
 
 
      public string Mover(BasePeca peca,Casa casaTG,Tabuleiro jogo){
         
+        King = GetKing(jogo,peca.cor);
+
         destino = peca.Cordenada;
         casasDispo = new Casa[8];
               
@@ -46,6 +50,8 @@ public class Cavalo : XadrezProperts
 
     public void EfectAtive(BasePeca peca,Tabuleiro jogo,Transform EfectMove,Transform EfectCapture){
 
+        King = GetKing(jogo,peca.cor);
+
         Vector2 v2Peca = CordToVector(peca.Cordenada);
         casasDispo = new Casa[8];
 
@@ -74,23 +80,22 @@ public class Cavalo : XadrezProperts
         }
     }
 
-    public bool ScanerCheck(Tabuleiro jogo,BasePeca peca){
-        
-        bool check = false;
+    public void CasasDominio(BasePeca peca,Tabuleiro jogo){
 
         casasDispo = new Casa[8];
 
         ScanCasasPosiveis(jogo, peca);
 
-        check = (!check)? ScanAtacks(casasDispo,peca) : true;
-
-        return check;
-
-    }    
+        for (int i = 0; i < casasDispo.Length; i++)
+        {
+            if(casasDispo[i] != null)
+                casasDispo[i].dominio = peca.cor;
+        }
+        
+    }
 
     void ScanCasasPosiveis(Tabuleiro jogo,BasePeca peca){
 
-        casasDispo = new Casa[8];
         Vector2 v2Peca = CordToVector(peca.Cordenada);
 
         for (int i = 0; i < jogo.houses.Count; i++)

@@ -7,6 +7,7 @@ public class Rei : XadrezProperts
     string destino;
 
     BasePeca[] torres = new BasePeca[2];
+    BasePeca king;
     
     Casa[] casasDispoN;
     Casa[] casasDispoS;
@@ -24,6 +25,7 @@ public class Rei : XadrezProperts
         
         destino = peca.Cordenada;
 
+        king = GetKing(jogo,peca.cor);
         GetTorres(peca,jogo);
         
         int n1 = (!peca.movimentada && !torres[0].movimentada)? 3 : 1;
@@ -56,6 +58,7 @@ public class Rei : XadrezProperts
     }
     public void EfectAtive(BasePeca peca,Tabuleiro jogo,Transform EfectMove,Transform EfectCapture){
 
+        king = GetKing(jogo,peca.cor);
         GetTorres(peca,jogo);
 
         int n1 = (!peca.movimentada && !torres[0].movimentada)? 2 : 1;
@@ -151,9 +154,7 @@ public class Rei : XadrezProperts
         }
     }
 
-     public bool ScanerCheck(Tabuleiro jogo,BasePeca peca){
-        
-        bool check = false;
+    public void CasasDominio(BasePeca peca,Tabuleiro jogo){
 
         casasDispoN = new Casa[1];
         casasDispoS = new Casa[1];
@@ -166,61 +167,60 @@ public class Rei : XadrezProperts
 
         ScanCasasPosiveis(jogo, peca);
 
-        check = (!check)? ScanAtacks(casasDispoL,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoN,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoO,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoS,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoNL,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoNO,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoSL,peca) : true;
-        check = (!check)? ScanAtacks(casasDispoSO,peca) : true;
-
-
-        return check;
+        ApliqueDominio(peca,casasDispoN);
+        ApliqueDominio(peca,casasDispoS);
+        ApliqueDominio(peca,casasDispoO);
+        ApliqueDominio(peca,casasDispoL);
+        ApliqueDominio(peca,casasDispoNL);
+        ApliqueDominio(peca,casasDispoSO);
+        ApliqueDominio(peca,casasDispoNO);
+        ApliqueDominio(peca,casasDispoSL);
 
     }
 
-    void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){      
-
+    void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){
 
         for (int i = 0; i < casaDirection.Length; i++)
         {
             if(casaDirection[i] != null){         
-                if(casaDirection[i].hospede == null || casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){
-                    if(casaDirection[i].CasaCord == casaTG.CasaCord){
-                        if(casaTG.CasaCord[0] == 'c' &&  !peca.movimentada && !torres[0].movimentada){
+                if(casaDirection[i].hospede == null || casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra)
+                {
+                    if(casaDirection[i].CasaCord == casaTG.CasaCord && casaTG.dominio == BasePeca.Cor.neutra){
+                        if(casaTG.CasaCord[0] == 'c' &&  !peca.movimentada && !torres[0].movimentada && !king.rei.check){
 
                             peca.movimentada = true;
                             torres[0].movimentada = true;
                             torres[0].Cordenada = VectorToPos(new Vector2(CordToVector(torres[0].Cordenada).x + 3,CordToVector(torres[0].Cordenada).y)); 
                             destino = casaTG.CasaCord;
 
-                        }else if(casaTG.CasaCord[0] == 'g' &&  !peca.movimentada && !torres[1].movimentada)
+                        }else if(casaTG.CasaCord[0] == 'g' &&  !peca.movimentada && !torres[1].movimentada && !king.rei.check)
                         {
                             peca.movimentada = true;
                             torres[1].movimentada = true;
                             torres[1].Cordenada = VectorToPos(new Vector2(CordToVector(torres[1].Cordenada).x - 2,CordToVector(torres[1].Cordenada).y)); 
                             destino = casaTG.CasaCord;
 
-                        }else{
+                        }else if(casaTG.dominio == peca.cor || casaTG.dominio == BasePeca.Cor.neutra) {
                             peca.movimentada = true;
                             destino = casaTG.CasaCord;
                         }
                     }
                 }else{
                    
-                    if(i == 0 && casaDirection[i].hospede.cor != peca.cor ){
-                                               
-                        if(casaDirection[i].CasaCord == casaTG.CasaCord){
-                            peca.movimentada = true;
-                            destino = casaTG.CasaCord;
+                   if(casaTG.dominio == BasePeca.Cor.neutra){
+                        if(i == 0 && casaDirection[i].hospede.cor != peca.cor ){
+                                                
+                            if(casaDirection[i].CasaCord == casaTG.CasaCord){
+                                peca.movimentada = true;
+                                destino = casaTG.CasaCord;
+                            }else{
+                                i = casaDirection.Length;
+                            }                        
+
                         }else{
                             i = casaDirection.Length;
-                        }                        
-
-                    }else{
-                        i = casaDirection.Length;
-                    }
+                        }
+                   }
                 }
             }
         }
@@ -232,41 +232,63 @@ public class Rei : XadrezProperts
         {            
             if(casaDirection[i] != null){         
                 if(casaDirection[i].hospede == null || casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){
+
+                    if(casaDirection[i].dominio == BasePeca.Cor.neutra){
                     
-                    for (int j = 0; j < EfectMove.childCount; j++)
-                    {
-                        if(!EfectMove.GetChild(j).gameObject.activeSelf){                
-                            Transform  efect = EfectMove.GetChild(j);
-                            efect.position = casaDirection[i].transform.position;
-                            efect.gameObject.SetActive(true);
-                            j = EfectMove.childCount;
-                        }    
-                    }           
-
-                }else{
-
-                    if(i == 0 && casaDirection[i].hospede.cor != peca.cor){
-                        
-                        for (int j = 0; j < EfectCapture.childCount; j++)
+                        for (int j = 0; j < EfectMove.childCount; j++)
                         {
-                            if(!EfectCapture.GetChild(j).gameObject.activeSelf){                
-                                Transform  efect = EfectCapture.GetChild(j);
+                            if(!EfectMove.GetChild(j).gameObject.activeSelf){                
+                                Transform  efect = EfectMove.GetChild(j);
                                 efect.position = casaDirection[i].transform.position;
                                 efect.gameObject.SetActive(true);
                                 j = EfectMove.childCount;
-                                i = casaDirection.Length;
                             }    
                         }
 
-                    }else{
-                        i = casaDirection.Length;
+                    }          
+
+                }else{
+                    if(casaDirection[i].dominio == BasePeca.Cor.neutra)
+                    {
+                        if(i == 0 && casaDirection[i].hospede.cor != peca.cor){
+                            
+                            for (int j = 0; j < EfectCapture.childCount; j++)
+                            {
+                                if(!EfectCapture.GetChild(j).gameObject.activeSelf){                
+                                    Transform  efect = EfectCapture.GetChild(j);
+                                    efect.position = casaDirection[i].transform.position;
+                                    efect.gameObject.SetActive(true);
+                                    j = EfectMove.childCount;
+                                    i = casaDirection.Length;
+                                }    
+                            }
+
+                        }else{
+                            i = casaDirection.Length;
+                        }
                     }
 
                 }
             }
 
         }
-    }   
+    }
+
+    public void ScanDominioAdversario(Tabuleiro jogo){
+        
+        if((int)(jogo.jogadas % 2) == 0){
+            foreach (Transform peca in jogo.pecasBrancas)
+            {
+                peca.GetComponent<BasePeca>().SetDominio(jogo);
+            }     
+        }else{
+            foreach (Transform peca in jogo.pecasPretas)
+            {
+                peca.GetComponent<BasePeca>().SetDominio(jogo);
+            }                     
+        }
+
+    }
 
     void GetTorres(BasePeca peca,Tabuleiro jogo){
                    
@@ -284,39 +306,4 @@ public class Rei : XadrezProperts
             }
         }     
     }
-
-    public void CheckVerific(List<Transform> pecas,Tabuleiro jogo){
-
-            foreach (Transform p in pecas)
-            {
-                BasePeca pecaOposta = p.GetComponent<BasePeca>();
-                if(!this.check){          
-                    switch (pecaOposta.tipo)
-                    {
-                        case BasePeca.Tipo.peao:
-                        this.check = pecaOposta.peao.ScanerCheck(jogo,pecaOposta);
-                        break;
-                        case BasePeca.Tipo.torre:
-                        this.check =  pecaOposta.torre.ScanerCheck(jogo,pecaOposta);
-                        break;
-                        case BasePeca.Tipo.cavalo:
-                        this.check =  pecaOposta.cavalo.ScanerCheck(jogo,pecaOposta);
-                        break;
-                        case BasePeca.Tipo.bispo:
-                        this.check =  pecaOposta.bispo.ScanerCheck(jogo,pecaOposta);
-                        break;
-                        case BasePeca.Tipo.dama:
-                        this.check =  pecaOposta.dama.ScanerCheck(jogo,pecaOposta);
-                        break;
-                        case BasePeca.Tipo.rei:
-                        this.check =  pecaOposta.rei.ScanerCheck(jogo,pecaOposta);
-                        break;                
-                    }
-                }                
-            }
-
-            Debug.Log(this.check);
-
-        }
-
 }

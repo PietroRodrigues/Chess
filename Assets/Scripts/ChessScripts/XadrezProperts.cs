@@ -4,40 +4,51 @@ using UnityEngine;
 
 public class XadrezProperts
 {
-    public bool ScanAtacks(Casa[] casaDirection, BasePeca peca){
-        return LadoScanAtaks(casaDirection,peca);
-    }
-
-    bool LadoScanAtaks(Casa[] casaDirection, BasePeca peca){
-        
-        foreach (Casa casa in casaDirection)
-        {
-            if(casa != null){
-                if(casa.hospede != null){
-                    if(casa.hospede.cor != peca.cor){
-                        casa.dominio = peca.cor;
-                        if(casa.hospede.tipo == BasePeca.Tipo.rei){
-                            casa.dominio = peca.cor;
-                            return true;  
-                        }else                        
-                            return false;
-                    }else{
-                        casa.dominio = peca.cor;
-                        return false;
-                    }
-                }else{
-                    casa.dominio = peca.cor;
-                }
-            }
-        }
-
-        return false; 
-    }
-
-
     public Vector2 CordToVector(string cord){
 
         return cordToVector(cord[0],cord[1]);
+        
+    }
+
+    public void ApliqueDominio(BasePeca peca,Casa[] casaDirection){        
+        
+        for (int i = 0; i < casaDirection.Length; i++)
+        {            
+            if(casaDirection[i] != null){         
+                if(casaDirection[i].hospede == null || casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){
+
+                    casaDirection[i].dominio = peca.cor;                        
+
+                }else{
+                    if(casaDirection[i].hospede.tipo == BasePeca.Tipo.rei && casaDirection[i].hospede.cor != peca.cor){
+                        casaDirection[i].dominio = peca.cor;
+                    }else{
+                        casaDirection[i].dominio = peca.cor;
+                        i = casaDirection.Length;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    public BasePeca GetKing(Tabuleiro jogo, BasePeca.Cor corRei){
+
+        BasePeca rei = null;
+                
+        foreach (Casa casa in jogo.houses)
+        {    
+            if(casa.hospede != null){
+                if(casa.hospede.tipo == BasePeca.Tipo.rei){                    
+                    if(casa.hospede.cor == corRei){
+                        return casa.hospede;
+                    }
+                }                    
+            }
+        }
+
+        return rei;
         
     }
 

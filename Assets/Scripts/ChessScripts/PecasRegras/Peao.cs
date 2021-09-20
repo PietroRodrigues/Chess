@@ -6,6 +6,8 @@ public class Peao : XadrezProperts
 {
     string destino;
 
+    BasePeca King;
+
     Casa[] casasDispoN;
     Casa[] casasDispoS;
     Casa[] casasDispoNL;
@@ -18,6 +20,8 @@ public class Peao : XadrezProperts
 
 
     public string Mover(BasePeca peca,Casa casaTG,Tabuleiro jogo){
+
+        King = GetKing(jogo,peca.cor);
 
         int n = (peca.movimentada)? 1 : 2;
         
@@ -37,13 +41,13 @@ public class Peao : XadrezProperts
 
         //Regra de Movimento-----------
         if(peca.cor == BasePeca.Cor.branco){
-            RegraMovimentes(peca,casasDispoN,casaTG);
-            RegraMovimentes(peca,casasDispoNL,casaTG);
-            RegraMovimentes(peca,casasDispoNO,casaTG);
+            RegraMovimentes(peca,casasDispoN,casaTG,jogo);
+            RegraMovimentes(peca,casasDispoNL,casaTG,jogo);
+            RegraMovimentes(peca,casasDispoNO,casaTG,jogo);
         }else if(peca.cor == BasePeca.Cor.preto){
-            RegraMovimentes(peca,casasDispoS,casaTG);
-            RegraMovimentes(peca,casasDispoSO,casaTG);      
-            RegraMovimentes(peca,casasDispoSL,casaTG);
+            RegraMovimentes(peca,casasDispoS,casaTG,jogo);
+            RegraMovimentes(peca,casasDispoSO,casaTG,jogo);      
+            RegraMovimentes(peca,casasDispoSL,casaTG,jogo);
         }                    
         //---------------------------------
                 
@@ -52,6 +56,8 @@ public class Peao : XadrezProperts
     }
 
     public void EfectAtive(BasePeca peca,Tabuleiro jogo,Transform EfectMove,Transform EfectCapture){
+
+        King = GetKing(jogo,peca.cor);
 
         int n = (peca.movimentada)? 1 : 2;
 
@@ -133,34 +139,29 @@ public class Peao : XadrezProperts
         }
     }
 
-    public bool ScanerCheck(Tabuleiro jogo,BasePeca peca){
+    public void CasasDominio(BasePeca peca,Tabuleiro jogo){  
         
-        bool check = false;
-
         int n = (peca.movimentada)? 1 : 2;
-        
+
         if(peca.cor == BasePeca.Cor.branco){
             casasDispoN = new Casa[n];
             casasDispoNL = new Casa[1];
             casasDispoNO = new Casa[1];
         }else if(peca.cor == BasePeca.Cor.preto){
-            casasDispoS = new Casa[n];      
-            casasDispoSO = new Casa[1];
-            casasDispoSL = new Casa[1];
-        }    
+            casasDispoS = new Casa[n];        
+            casasDispoSO = new Casa[1];        
+            casasDispoSL = new Casa[1];        
+        } 
 
         ScanCasasPosiveis(jogo, peca);
 
         if(peca.cor == BasePeca.Cor.branco){
-            check = (!check)? ScanAtacks(casasDispoNL,peca) : true;
-            check = (!check)? ScanAtacks(casasDispoNO,peca) : true;
+            ApliqueDominio(peca,casasDispoNL);
+            ApliqueDominio(peca,casasDispoNO);
         }else if(peca.cor == BasePeca.Cor.preto){
-            check = (!check)? ScanAtacks(casasDispoSL,peca) : true;
-            check = (!check)? ScanAtacks(casasDispoSO,peca) : true;
+            ApliqueDominio(peca,casasDispoSL);
+            ApliqueDominio(peca,casasDispoSO);      
         }
-        
-        return check;
-
     }
 
     void EfectsDistribuite(BasePeca peca,Casa[] casaDirection,Transform EfectMove,Transform EfectCapture){
@@ -209,7 +210,7 @@ public class Peao : XadrezProperts
 
     }
 
-    void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG){
+    void RegraMovimentes(BasePeca peca,Casa[] casaDirection,Casa casaTG,Tabuleiro jogo){
 
         for (int i = 0; i < casaDirection.Length; i++)
         {
@@ -254,7 +255,8 @@ public class Peao : XadrezProperts
                             if(casaDirection[i].CasaCord == casaTG.CasaCord){
                             
                                 if(casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){    
-                                    casaDirection[i].hospede.peao.peaoVinculo.gameObject.SetActive(false);                           
+                                    //casaDirection[i].hospede.peao.peaoVinculo.gameObject.SetActive(false);                                   
+                                                               
                                 }
                                 peca.movimentada = true;
                                 destino = casaTG.CasaCord;
