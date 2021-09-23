@@ -204,9 +204,7 @@ public class Tabuleiro : MonoBehaviour
     public void SetaPecasInCord(){
 
         foreach (Casa c in houses){
-            if(c.hospede != null)
-                if(c.hospede.tipo != BasePeca.Tipo.sombra)
-                    c.hospede = null;
+               c.hospede = null;
         }
 
         foreach (Casa c in houses){
@@ -217,9 +215,11 @@ public class Tabuleiro : MonoBehaviour
                 string cord = peca.GetComponent<BasePeca>().Cordenada;
 
                 if(c.hospede == null){
-                    if(peca.GetComponent<BasePeca>().Cordenada == c.CasaCord)
-                        c.hospede = peca.GetComponent<BasePeca>();
-                
+                    if(peca.gameObject.activeSelf){
+                        if(peca.GetComponent<BasePeca>().Cordenada == c.CasaCord){
+                            c.hospede = peca.GetComponent<BasePeca>();
+                        }
+                    }                
                 }
 
                 if(casas.ContainsKey(cord)){
@@ -236,9 +236,11 @@ public class Tabuleiro : MonoBehaviour
                 string cord = peca.GetComponent<BasePeca>().Cordenada;
 
                 if(c.hospede == null){
-                    if(peca.GetComponent<BasePeca>().Cordenada == c.CasaCord)
-                        c.hospede = peca.GetComponent<BasePeca>();
-                
+                   if(peca.gameObject.activeSelf){
+                        if(peca.GetComponent<BasePeca>().Cordenada == c.CasaCord){
+                            c.hospede = peca.GetComponent<BasePeca>();
+                        }
+                    }                
                 }
 
                 if(casas.ContainsKey(cord)){

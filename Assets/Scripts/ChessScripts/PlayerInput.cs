@@ -15,6 +15,7 @@ public class PlayerInput : MonoBehaviour
     public Tabuleiro tabuleiro;
     Transform pecaSelected = null;
     GameObject pecaCapBeckup = null;
+    GameObject shadowBeckup = null;
 
     // Update is called once per frame
 
@@ -52,18 +53,6 @@ public class PlayerInput : MonoBehaviour
             mouseEfect.gameObject.SetActive(false);
 
         }
-    }
-
-    void ClearEnPassant(List<Transform> timeCorOpsota){
-        
-        for (int i = 0; i < timeCorOpsota.Count; i++)
-        {
-            if(timeCorOpsota[i].GetComponent<BasePeca>().peao.enPassantAlvo != null){
-                Destroy(timeCorOpsota[i].GetComponent<BasePeca>().peao.enPassantAlvo);
-                timeCorOpsota[i].GetComponent<BasePeca>().peao.enPassantAlvo = null;
-            }
-        }
-
     }
     
     void pecasMove(List<Transform> timeCor, List<Transform> timeCorOposta){
@@ -112,7 +101,6 @@ public class PlayerInput : MonoBehaviour
                     pecaSelected.GetComponent<BasePeca>().Cordenada = destino;
                     tabuleiro.SetaPecasInCord();
                     BasePeca.ClearEfect(moveEfect.transform,captureEfect.transform);
-                    ClrearShados(false);
                     ClearDominio();
                     SetaDominio();
                     VerificCheck(tabuleiro);
@@ -125,6 +113,7 @@ public class PlayerInput : MonoBehaviour
                             
                             pecaSelected = null;
                             tabuleiro.jogadas++;
+                            ClrearShados(true);
                             ClearDominio();
                             SetaDominio();
                             VerificCheck(tabuleiro);
@@ -137,6 +126,7 @@ public class PlayerInput : MonoBehaviour
 
                             pecaSelected = null;
                             tabuleiro.jogadas++;
+                            ClrearShados(true);
                             ClearDominio();
                             SetaDominio();
                             VerificCheck(tabuleiro);
@@ -166,7 +156,7 @@ public class PlayerInput : MonoBehaviour
             pecaSelected.GetComponent<BasePeca>().movimentada = false;
         }
 
-        ClrearShados(true);
+        //ClrearShados(true);
         ClearDominio();
         SetaDominio();
         VerificCheck(tabuleiro);
@@ -188,7 +178,6 @@ public class PlayerInput : MonoBehaviour
                         }
                     }else{
                         casa.hospede.rei.check = false;
-                        Debug.Log(casa.hospede.rei.check);
                     }
 
                 }
@@ -235,14 +224,19 @@ public class PlayerInput : MonoBehaviour
 
             if(hit.collider.gameObject.name == timeCorOposta[i].GetComponent<BasePeca>().Cordenada){                          
                 
-                if(timeCorOposta[i].GetComponent<BasePeca>().peao.enPassantAlvo != null){
-                   Debug.Log(timeCorOposta[i].GetComponent<BasePeca>().peao.peaoVinculo);
-                   Destroy(timeCorOposta[i].GetComponent<BasePeca>().peao.enPassantAlvo);
+                if(timeCorOposta[i].GetComponent<BasePeca>().tipo == BasePeca.Tipo.sombra){
+
+                    GameObject shadow = timeCorOposta[i].gameObject;
+                    shadowBeckup = timeCorOposta[i].gameObject;
+                    pecaCapBeckup = timeCorOposta[i].GetComponent<BasePeca>().peao.peaoVinculo.gameObject;
+                    timeCorOposta[i].GetComponent<BasePeca>().peao.peaoVinculo.gameObject.SetActive(false);
+
+                }else{                
+                    pecaCapBeckup = timeCorOposta[i].gameObject;
+                    timeCorOposta[i].gameObject.SetActive(false);
+                    timeCorOposta.RemoveAt(i);
                 }
                 
-                pecaCapBeckup = timeCorOposta[i].gameObject;
-                timeCorOposta[i].gameObject.SetActive(false);
-                timeCorOposta.RemoveAt(i);
             }
 
         }
@@ -255,6 +249,22 @@ public class PlayerInput : MonoBehaviour
                           
        }
        tabuleiro.ClearDominioEfects();                          
+    }
+
+    void ClearEnPassant(List<Transform> timeCorOposta){
+        
+        for (int i = 0; i < timeCorOposta.Count; i++)
+        {
+            if(timeCorOposta[i].GetComponent<BasePeca>().tipo == BasePeca.Tipo.sombra){
+
+                GameObject shadow = timeCorOposta[i].gameObject;             
+                timeCorOposta.RemoveAt(i);
+                Destroy(shadow);
+
+            }
+
+        }
+
     }
 
 }

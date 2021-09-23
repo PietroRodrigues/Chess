@@ -230,14 +230,20 @@ public class Peao : XadrezProperts
 
                                     if(peca.peao.enPassantAlvo.GetComponent<BasePeca>() == null){
                                         peca.peao.enPassantAlvo.AddComponent<BasePeca>();                            
-                                    }
-                                    
+                                    }                                    
+
                                     peca.peao.enPassantAlvo.GetComponent<BasePeca>().gameObject.name = "enPassantAlvo";
                                     peca.peao.enPassantAlvo.GetComponent<BasePeca>().Cordenada = casaDirection[0].CasaCord;
                                     casaDirection[0].hospede =  peca.peao.enPassantAlvo.GetComponent<BasePeca>();
                                     peca.peao.enPassantAlvo.GetComponent<BasePeca>().peao.peaoVinculo = peca;
                                     peca.peao.enPassantAlvo.GetComponent<BasePeca>().cor = peca.cor;
                                     peca.peao.enPassantAlvo.GetComponent<BasePeca>().tipo = BasePeca.Tipo.sombra;
+                                    
+                                    if(peca.cor == BasePeca.Cor.branco){
+                                        jogo.pecasBrancas.Add(peca.peao.enPassantAlvo.GetComponent<BasePeca>().gameObject.transform);
+                                    }else if(peca.cor == BasePeca.Cor.preto){
+                                        jogo.pecasPretas.Add(peca.peao.enPassantAlvo.GetComponent<BasePeca>().gameObject.transform);
+                                    }
                                     
 
                                     peca.peao.enPassantAlvo.transform.position = casaDirection[0].transform.position;
@@ -253,11 +259,6 @@ public class Peao : XadrezProperts
                     if(casaDirection[i].hospede.cor != peca.cor){
                         if(CordToVector(casaDirection[i].CasaCord).x == CordToVector(peca.Cordenada).x + 1 || CordToVector(casaDirection[i].CasaCord).x == CordToVector(peca.Cordenada).x - 1){                         
                             if(casaDirection[i].CasaCord == casaTG.CasaCord){
-                            
-                                if(casaDirection[i].hospede.tipo == BasePeca.Tipo.sombra){    
-                                    //casaDirection[i].hospede.peao.peaoVinculo.gameObject.SetActive(false);                                   
-                                                               
-                                }
                                 peca.movimentada = true;
                                 destino = casaTG.CasaCord;
                             }else{
