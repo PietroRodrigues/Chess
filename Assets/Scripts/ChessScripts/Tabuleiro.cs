@@ -129,52 +129,54 @@ public class Tabuleiro : MonoBehaviour
                 pecasBrancas[i].gameObject.AddComponent<BasePeca>();
                 pecasBrancas[i].gameObject.GetComponent<BasePeca>().cor = BasePeca.Cor.branco;
 
-                 for (int w = 0; w < tabuleiro.childCount; w++)
-                 {                   
-                     Vector2 casaV2 , pecaV2;
+                for (int w = 0; w < tabuleiro.childCount; w++)
+                {                   
+                    Vector2 casaV2 , pecaV2;
 
-                     pecaV2 = new Vector2( pecasBrancas[i].transform.position.x, pecasBrancas[i].transform.position.z);
+                    pecaV2 = new Vector2( pecasBrancas[i].transform.position.x, pecasBrancas[i].transform.position.z);
 
-                     casaV2 = new Vector2(houses[w].transform.position.x,houses[w].transform.position.z);
+                    casaV2 = new Vector2(houses[w].transform.position.x,houses[w].transform.position.z);
 
-                     if(pecaV2 == casaV2){
-                         
-                         houses[w].hospede =  pecasBrancas[i].GetComponent<BasePeca>();
-                         houses[w].hospede.Cordenada = houses[w].CasaCord;
-                         pecasBrancas[i].GetComponent<BasePeca>().CordInicial = houses[w].CasaCord;                         
-                         houses[w].hospede.tipo = SetTipo(houses[w].hospede);                        
+                    if(pecaV2 == casaV2){
+                        
+                        houses[w].hospede =  pecasBrancas[i].GetComponent<BasePeca>();
+                        houses[w].hospede.Cordenada = houses[w].CasaCord;
+                        pecasBrancas[i].GetComponent<BasePeca>().CordInicial = houses[w].CasaCord;                         
+                        houses[w].hospede.tipo = SetTipo(houses[w].hospede);
+                        MostraPeca(houses[w].hospede);          
 
-                     }
+                    }
 
-                 }
+                }
 
-         }
+        }
 
-         for (int i = 0; i < pecasPretas.Count; i++)
-         {
-                 pecasPretas[i].gameObject.AddComponent<BasePeca>();
-                 pecasPretas[i].gameObject.GetComponent<BasePeca>().cor = BasePeca.Cor.preto;
+        for (int i = 0; i < pecasPretas.Count; i++)
+        {
+                pecasPretas[i].gameObject.AddComponent<BasePeca>();
+                pecasPretas[i].gameObject.GetComponent<BasePeca>().cor = BasePeca.Cor.preto;
 
-                 for (int w = 0; w < tabuleiro.childCount; w++)
-                 {
-                     Vector2 casaV2 , pecaV2;
+                for (int w = 0; w < tabuleiro.childCount; w++)
+                {
+                    Vector2 casaV2 , pecaV2;
 
-                     pecaV2 = new Vector2( pecasPretas[i].transform.position.x, pecasPretas[i].transform.position.z);
+                    pecaV2 = new Vector2( pecasPretas[i].transform.position.x, pecasPretas[i].transform.position.z);
 
-                     casaV2 = new Vector2(houses[w].transform.position.x,houses[w].transform.position.z);
+                    casaV2 = new Vector2(houses[w].transform.position.x,houses[w].transform.position.z);
 
-                     if(pecaV2 == casaV2){
+                    if(pecaV2 == casaV2){
 
-                         houses[w].hospede =  pecasPretas[i].GetComponent<BasePeca>();
-                         houses[w].hospede.Cordenada =  houses[w].CasaCord;
-                         pecasPretas[i].GetComponent<BasePeca>().CordInicial = houses[w].CasaCord; 
-                         houses[w].hospede.tipo = SetTipo(houses[w].hospede);
+                        houses[w].hospede =  pecasPretas[i].GetComponent<BasePeca>();
+                        houses[w].hospede.Cordenada =  houses[w].CasaCord;
+                        pecasPretas[i].GetComponent<BasePeca>().CordInicial = houses[w].CasaCord; 
+                        houses[w].hospede.tipo = SetTipo(houses[w].hospede);
+                        MostraPeca(houses[w].hospede);
 
-                     }
+                    }
 
-                 }
+                }
 
-         }
+        }
 
     }
 
@@ -254,6 +256,47 @@ public class Tabuleiro : MonoBehaviour
             
         }
 
+
+    }
+
+    public void MostraPeca(BasePeca peca){
+
+        switch (peca.tipo)
+        {
+            case BasePeca.Tipo.peao:
+                Ativa3D(peca,"peao");
+            break;
+            case BasePeca.Tipo.torre:
+                Ativa3D(peca,"torre");
+            break;
+            case BasePeca.Tipo.bispo:
+                Ativa3D(peca,"bispo");
+            break;
+            case BasePeca.Tipo.cavalo:
+                Ativa3D(peca,"cavalo");
+            break;
+            case BasePeca.Tipo.dama:
+                Ativa3D(peca,"dama");
+            break;
+            case BasePeca.Tipo.rei:
+                Ativa3D(peca,"rei");
+            break;
+            default:
+            break;
+        }
+
+    }
+
+    void Ativa3D(BasePeca peca, string pecaName){
+        
+        foreach (Transform tipos3D in peca.transform)
+        {
+            if(tipos3D.gameObject.name == pecaName){
+                tipos3D.gameObject.SetActive(true);
+            }else{
+                tipos3D.gameObject.SetActive(false);
+            }            
+        }
 
     }
 
