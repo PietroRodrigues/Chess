@@ -68,9 +68,3 @@ The project demonstrates practical Unity development concepts including:
 ## Status
 
 Personal game-development prototype. The repository documents an experimental implementation of a 3D chess experience and may not contain every rule and feature required for a complete production chess game.
-
-## Author
-
-**Pietro Rodrigues**
-
-[GitHub](https://github.com/PietroRodrigues)
